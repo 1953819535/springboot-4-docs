@@ -63,3 +63,12 @@ guide/getting-started.md、guide/ioc-di.md、guide/configuration.md、guide/rest
 **导航链更新**：glossary 加入侧边栏"更多"区首位，cleanup 下一章 → glossary → FAQ，25 页导航审计归零。
 
 复验：概念审计 36 术语全覆盖（11 项缺口清零；唯一余项"镜像层/Buildpacks"为审计窗口口径误报——deployment.md 术语速览框内已有完整定义）；红线 0 命中；构建通过（6.03s，25 HTML 页，0 死链）。站点最终态：25 页 / 372KB。
+## 六轮增强（2026-09-15）：Git 入库 + 术语双向链接 + 流程图
+
+按用户选择的"高价值低成本"三项完成：
+
+1. **Git 入库**：桌面仓库 git init，基线提交 0c3f9f9（5 轮精修成果留档），增强提交 c1fda58——误删/改坏从此可回滚。
+2. **术语双向链接**：glossary.md 18 个 H3 加锚点；脚本全站扫描 18 个核心术语在每页的首次出现，共植入 151 处指向术语表的链接（每术语每页最多 1 处防刷链）；6 处标题内误链自动还原（避免破坏 VitePress 目录锚点）。
+3. **流程图**：手绘 4 张统一风格 SVG（Spring 品牌绿、Build 极简风）嵌入对应章节——security（JWT 认证时序）、batch（chunk 执行模型与容错）、virtual-threads（虚拟线程 vs 平台线程阻塞行为）、configuration（配置覆盖顺序）。
+
+复验：构建通过（11.73s，dist 26 页含 4 图），红线 0 命中，导航审计沿用归零态。
