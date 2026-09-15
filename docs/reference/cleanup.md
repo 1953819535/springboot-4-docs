@@ -85,7 +85,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/appendix/deprecated-applicat
 
 ::: info 官方出处
 - 废弃属性全清单：[appendix/deprecated-application-properties/index](https://docs.spring.io/spring-boot/4.1.1/appendix/deprecated-application-properties.html)（67 键 / 9 分类）
-- 升级机制与迁移工具：`upgrading.md`
+- 升级机制与迁移工具：[upgrading](https://docs.spring.io/spring-boot/4.1.1/upgrading.html)
 - Jackson 2 弃用原文：[reference/features/json](https://docs.spring.io/spring-boot/4.1.1/reference/features/json.html)
 - Zipkin 预告与 LiveReload 弃用：[reference/actuator/tracing](https://docs.spring.io/spring-boot/4.1.1/reference/actuator/tracing.html)、[reference/features/devtools](https://docs.spring.io/spring-boot/4.1.1/reference/features/devtools.html)
 :::

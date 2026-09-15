@@ -284,5 +284,5 @@ JDK 25 环境下的容器镜像还能顺带产出 AOT cache：构建阶段执行
 - 官方文档：[how-to/deployment/cloud](https://docs.spring.io/spring-boot/4.1.1/how-to/deployment/cloud.html)（preStop、terminationGracePeriodSeconds、buildpack 内存参数示例）
 - 官方文档：[how-to/deployment/installing](https://docs.spring.io/spring-boot/4.1.1/how-to/deployment/installing.html)（systemd unit 全文）
 - 官方文档：[appendix/application-properties/index](https://docs.spring.io/spring-boot/4.1.1/appendix/application-properties.html)（server.* 与 spring.lifecycle.* 默认值）
-- 官方文档：`maven-plugin/packaging.md`、`gradle-plugin/packaging.md`（repackage 与 bootJar）
+- 官方文档：[maven-plugin/packaging](https://docs.spring.io/spring-boot/4.1.1/maven-plugin/packaging.html)、[gradle-plugin/packaging](https://docs.spring.io/spring-boot/4.1.1/gradle-plugin/packaging.html)（repackage 与 bootJar）
 - 站内：[可观测性与 Actuator](/advanced/observability) · [常见问题](/faq) · [配置项速查](/reference/api)

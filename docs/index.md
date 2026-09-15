@@ -16,7 +16,7 @@ hero:
       link: /practice/virtual-threads
 
 features:
-  - icon: ⚡
+  - icon: ☕
     title: JDK 25 LTS 现代语法
     details: Record 模式匹配、未命名变量与模式、虚拟线程深度实践——示例代码全部按 JDK 25 基准编写，可直接落地企业项目。
     link: /practice/virtual-threads

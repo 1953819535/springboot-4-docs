@@ -289,8 +289,8 @@ Micrometer Tracing 是 tracer 门面，Spring Boot 自动配置两个实现组�
 - 官方文档：[reference/actuator/observability](https://docs.spring.io/spring-boot/4.1.1/reference/actuator/observability.html)（Micrometer Observation、@Observed 注解、低/高基数、Common Tags）
 - 官方文档：[reference/actuator/metrics](https://docs.spring.io/spring-boot/4.1.1/reference/actuator/metrics.html)（Prometheus 抓取配置、Registering Custom Metrics、per-meter 过滤）
 - 官方文档：[reference/actuator/tracing](https://docs.spring.io/spring-boot/4.1.1/reference/actuator/tracing.html)（Micrometer Tracing、OTLP/Zipkin、采样率）
-- 官方文档：`api/rest/actuator/loggers.md`（loggers GET/POST 请求与响应结构）
-- 官方文档：`api/rest/actuator/metrics.md`（metrics 端点不作为生产抓取后端）
-- 官方文档：`maven-plugin/build-info.md`、`gradle-plugin/integrating-with-actuator.md`（build-info）
+- 官方文档：[api/rest/actuator/loggers](https://docs.spring.io/spring-boot/4.1.1/api/rest/actuator/loggers.html)（loggers GET/POST 请求与响应结构）
+- 官方文档：[api/rest/actuator/metrics](https://docs.spring.io/spring-boot/4.1.1/api/rest/actuator/metrics.html)（metrics 端点不作为生产抓取后端）
+- 官方文档：[maven-plugin/build-info](https://docs.spring.io/spring-boot/4.1.1/maven-plugin/build-info.html)、[gradle-plugin/integrating-with-actuator](https://docs.spring.io/spring-boot/4.1.1/gradle-plugin/integrating-with-actuator.html)（build-info）
 - 官方文档：[appendix/application-properties/index](https://docs.spring.io/spring-boot/4.1.1/appendix/application-properties.html)（management.* 默认值）
 - 站内：[打包、镜像与部署](/advanced/deployment) · [安全与鉴权](/advanced/security) · [配置项速查](/reference/api)

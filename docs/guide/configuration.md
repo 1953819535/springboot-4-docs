@@ -343,4 +343,4 @@ spring:
 
 官网对应页：<https://docs.spring.io/spring-boot/4.1.1/reference/features/external-config.html>
 
-站内相关页：[[IoC](/glossary#ioc-容器与-ioc-容器) 与依赖注入](/guide/ioc-di) · [REST API 开发全规范](/guide/rest-api) · [可观测性](/advanced/observability)
+站内相关页：[IoC、依赖注入与配置绑定](/guide/ioc-di) · [REST API 开发全规范](/guide/rest-api) · [可观测性](/advanced/observability)

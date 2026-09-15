@@ -325,10 +325,10 @@ java -jar build/libs/demo-0.0.1-SNAPSHOT.jar
 官方文档（在线）：
 
 - [tutorial/first-application/index](https://docs.spring.io/spring-boot/4.1.1/tutorial/first-application.html) —— 本页主线教程（Maven/Gradle 双版本）
-- `system-requirements.md` —— Java/构建工具/Servlet 容器/GraalVM 版本矩阵
+- [system-requirements](https://docs.spring.io/spring-boot/4.1.1/system-requirements.html) —— Java/构建工具/Servlet 容器/GraalVM 版本矩阵
 - [reference/using/devtools](https://docs.spring.io/spring-boot/4.1.1/reference/using/devtools.html) —— devtools 自动重启、触发文件、类加载诊断
 - [specification/executable-jar/index](https://docs.spring.io/spring-boot/4.1.1/specification/executable-jar.html) —— 可执行 jar 与嵌套 jar 结构规范
 
 官网对应页：<https://docs.spring.io/spring-boot/4.1.1/tutorial/first-application/index.html>
 
-站内相关页：[[IoC](/glossary#ioc-容器与-ioc-容器) 与依赖注入](/guide/ioc-di) · [外化配置与多环境](/guide/configuration) · [REST API 开发全规范](/guide/rest-api)
+站内相关页：[IoC、依赖注入与配置绑定](/guide/ioc-di) · [外化配置与多环境](/guide/configuration) · [REST API 开发全规范](/guide/rest-api)
