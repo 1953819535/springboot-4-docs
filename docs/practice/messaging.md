@@ -364,7 +364,7 @@ public DefaultJmsListenerContainerFactory myFactory(
 
 ## 延伸阅读
 
-- 官方镜像（本章依据语料）：`spring-boot-4.1.1-docs/reference/messaging/kafka.md`、`spring-boot-4.1.1-docs/reference/messaging/amqp.md`、`spring-boot-4.1.1-docs/reference/messaging/jms.md`
+- 官方文档（本页依据）：[reference/messaging/kafka](https://docs.spring.io/spring-boot/4.1.1/reference/messaging/kafka.html)、[reference/messaging/amqp](https://docs.spring.io/spring-boot/4.1.1/reference/messaging/amqp.html)、[reference/messaging/jms](https://docs.spring.io/spring-boot/4.1.1/reference/messaging/jms.html)
 - Spring for Apache Kafka 文档（AckMode 全表、错误处理与死信细节）：[spring-kafka reference](https://docs.spring.io/spring-kafka/reference/4.1/index.html)
 - Spring AMQP 文档（死信交换机、容器配置）：[spring-amqp reference](https://docs.spring.io/spring-amqp/reference/4.1/index.html)
 - Spring Framework JMS 集成（两种监听容器差异）：[JMS chapter](https://docs.spring.io/spring-framework/reference/7.0/integration/jms.html)

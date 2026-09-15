@@ -309,7 +309,7 @@ provider 自动探测顺序：Generic → JCache → Hazelcast → Infinispan �
 
 ## 延伸阅读
 
-- 官方镜像（本章唯一依据语料）：`spring-boot-4.1.1-docs/reference/io/caching.md`
+- 官方文档（本页唯一依据）：[reference/io/caching](https://docs.spring.io/spring-boot/4.1.1/reference/io/caching.html)
 - Spring Framework 缓存抽象（注解全语义、SpEL 上下文、keyGenerator、CacheManager/CacheResolver 组合）：[cache chapter](https://docs.spring.io/spring-framework/reference/7.0/integration/cache.html)
 - Caffeine 官方仓库（spec 参数完整口径）：[github.com/ben-manes/caffeine](https://github.com/ben-manes/caffeine)
 - 站内：上一章 [数据访问与事务](/practice/data-access) ｜ 下一章 [安全与鉴权](/advanced/security) ｜ 配套 [可观测性与 Actuator](/advanced/observability)

@@ -334,12 +334,12 @@ spring:
 
 ### 延伸阅读
 
-官方镜像（本地 `spring-boot-4.1.1-docs/` 目录）：
+官方文档（在线）：
 
-- `reference/features/external-config.md` —— 15 源优先级、配置文件位置、占位符、随机值、多文档、configtree、构造器绑定与校验
-- `reference/features/profiles.md` —— active/include/group、默认 profile、命名限制
-- `appendix/application-properties/index.md` —— 全量配置属性速查
-- `specification/configuration-metadata/annotation-processor.md` —— 自有配置键的 IDE 元数据
+- [reference/features/external-config](https://docs.spring.io/spring-boot/4.1.1/reference/features/external-config.html) —— 15 源优先级、配置文件位置、占位符、随机值、多文档、configtree、构造器绑定与校验
+- [reference/features/profiles](https://docs.spring.io/spring-boot/4.1.1/reference/features/profiles.html) —— active/include/group、默认 profile、命名限制
+- [appendix/application-properties/index](https://docs.spring.io/spring-boot/4.1.1/appendix/application-properties.html) —— 全量配置属性速查
+- [specification/configuration-metadata/annotation-processor](https://docs.spring.io/spring-boot/4.1.1/specification/configuration-metadata/annotation-processor.html) —— 自有配置键的 IDE 元数据
 
 官网对应页：<https://docs.spring.io/spring-boot/4.1.1/reference/features/external-config.html>
 

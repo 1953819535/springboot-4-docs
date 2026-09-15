@@ -429,6 +429,6 @@ class ResourceServerSecurityTests {
 
 ### 延伸阅读
 
-- 官方镜像：[Web Security](https://docs.spring.io/spring-boot/4.1.1/reference/web/spring-security.html) ｜ [OAuth2](https://docs.spring.io/spring-boot/4.1.1/reference/security/oauth2.html)
+- 官方文档：[Web Security](https://docs.spring.io/spring-boot/4.1.1/reference/web/spring-security.html) ｜ [OAuth2](https://docs.spring.io/spring-boot/4.1.1/reference/security/oauth2.html)
 - Spring Security 文档：[方法级授权](https://docs.spring.io/spring-security/reference/7.1/servlet/authorization/method-security.html) ｜ [资源服务器](https://docs.spring.io/spring-security/reference/7.1/servlet/oauth2/resource-server/index.html)
 - 站内：[测试](/advanced/testing) ｜ [可观测性](/advanced/observability) ｜ [API 参考](/reference/api)

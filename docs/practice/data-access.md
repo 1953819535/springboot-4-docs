@@ -510,6 +510,6 @@ create table orders (
 
 ### 延伸阅读
 
-- 官方镜像：`spring-boot-4.1.1-docs/reference/data/sql.md`（JdbcClient / JPA / 连接池）、`how-to/data-access.md`（自定义与多数据源、Multiple EntityManagerFactories）、`appendix/application-properties/index.md`（spring.datasource.hikari.* / spring.jpa.* / spring.flyway.*）
+- 官方文档：[reference/data/sql](https://docs.spring.io/spring-boot/4.1.1/reference/data/sql.html)（JdbcClient / JPA / 连接池）、[how-to/data-access](https://docs.spring.io/spring-boot/4.1.1/how-to/data-access.html)（自定义与多数据源、Multiple EntityManagerFactories）、[appendix/application-properties/index](https://docs.spring.io/spring-boot/4.1.1/appendix/application-properties.html)（spring.datasource.hikari.* / spring.jpa.* / spring.flyway.*）
 - 官方在线：[SQL Databases](https://docs.spring.io/spring-boot/4.1.1/reference/data/sql.html) · [How-to: Data Access](https://docs.spring.io/spring-boot/4.1.1/how-to/data-access.html)
 - 站内：[[虚拟线程](/glossary#虚拟线程-vs-平台线程)深度实践](/practice/virtual-threads)（连接池并发匹配）· [消息：Kafka、AMQP 与 JMS](/practice/messaging)（上一章）· [缓存：Caffeine 与 Redis](/practice/caching)（下一章）

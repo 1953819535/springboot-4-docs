@@ -484,11 +484,11 @@ Spring MVC 内建 API 版本能力：`@GetMapping(version = "1.1")` 按 `spring.
 
 ### 延伸阅读
 
-官方镜像（本地 `spring-boot-4.1.1-docs/` 目录）：
+官方文档（在线）：
 
-- `reference/web/servlet.md` —— Spring MVC 起步、HttpMessageConverters、Error Handling 与 ProblemDetail、CORS、API Versioning 各节
-- `appendix/application-properties/index.md` —— `spring.servlet.multipart.*`、`spring.data.web.pageable.*`、`spring.mvc.problemdetails.*` 属性速查
-- `reference/io/rest-client.md` —— RestClient 外呼与 API 版本联动
+- [reference/web/servlet](https://docs.spring.io/spring-boot/4.1.1/reference/web/servlet.html) —— Spring MVC 起步、HttpMessageConverters、Error Handling 与 ProblemDetail、CORS、API Versioning 各节
+- [appendix/application-properties/index](https://docs.spring.io/spring-boot/4.1.1/appendix/application-properties.html) —— `spring.servlet.multipart.*`、`spring.data.web.pageable.*`、`spring.mvc.problemdetails.*` 属性速查
+- [reference/io/rest-client](https://docs.spring.io/spring-boot/4.1.1/reference/io/rest-client.html) —— RestClient 外呼与 API 版本联动
 
 官网对应页：<https://docs.spring.io/spring-boot/4.1.1/reference/web/servlet.html>
 

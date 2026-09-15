@@ -203,7 +203,7 @@ class UserFlowIT {
 }
 ```
 
-`@ServiceConnection` 让容器连接信息自动生成对应的 `ConnectionDetails` Bean，优先级高于任何连接相关配置属性——不再手写 `@DynamicPropertySource` 样板。`spring-boot-testcontainers` 内置的连接工厂覆盖（摘自官方镜像 `reference/testing/testcontainers.md`）：
+`@ServiceConnection` 让容器连接信息自动生成对应的 `ConnectionDetails` Bean，优先级高于任何连接相关配置属性——不再手写 `@DynamicPropertySource` 样板。`spring-boot-testcontainers` 内置的连接工厂覆盖（摘自官方镜像 [reference/testing/testcontainers](https://docs.spring.io/spring-boot/4.1.1/reference/testing/testcontainers.html)）：
 
 | 中间件 | 匹配的容器 |
 | --- | --- |
@@ -410,7 +410,7 @@ class OrderFlowIT {
 
 ### 延伸阅读
 
-- 官方镜像：`spring-boot-4.1.1-docs/reference/testing/spring-boot-applications.md`（`@SpringBootTest`、切片、JSON/JPA/MVC 测试全量说明）、`reference/testing/testcontainers.md`（容器生命周期与 Service Connections 清单）
-- 官方镜像：`spring-boot-4.1.1-docs/reference/testing/test-utilities.md`（TestRestTemplate 等）、`reference/testing/test-modules.md`（`-test` 模块清单）、`how-to/testing.md`（切片配置拆分建议）
-- 官方镜像：`spring-boot-4.1.1-docs/appendix/test-auto-configuration/slices.md`（各切片默认导入的自动配置表）
+- 官方文档：[reference/testing/spring-boot-applications](https://docs.spring.io/spring-boot/4.1.1/reference/testing/spring-boot-applications.html)（`@SpringBootTest`、切片、JSON/JPA/MVC 测试全量说明）、[reference/testing/testcontainers](https://docs.spring.io/spring-boot/4.1.1/reference/testing/testcontainers.html)（容器生命周期与 Service Connections 清单）
+- 官方文档：[reference/testing/test-utilities](https://docs.spring.io/spring-boot/4.1.1/reference/testing/test-utilities.html)（TestRestTemplate 等）、[reference/testing/test-modules](https://docs.spring.io/spring-boot/4.1.1/reference/testing/test-modules.html)（`-test` 模块清单）、[how-to/testing](https://docs.spring.io/spring-boot/4.1.1/how-to/testing.html)（切片配置拆分建议）
+- 官方文档：[appendix/test-auto-configuration/slices](https://docs.spring.io/spring-boot/4.1.1/appendix/test-auto-configuration/slices.html)（各切片默认导入的自动配置表）
 - 站内：[安全](/advanced/security)（`@WebMvcTest` + Spring Security 测试）｜ [数据访问与事务](/practice/data-access)（`@DataJpaTest` 的仓储写法）｜ [注解速查](/reference/api)

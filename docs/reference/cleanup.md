@@ -55,7 +55,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/appendix/deprecated-applicat
 
 ### 配置项（旧键 → 新键）
 
-以下属性键为官方已废弃清单中的代表项（完整 67 键见本地镜像 `appendix/deprecated-application-properties/index.md`）：
+以下属性键为官方已废弃清单中的代表项（完整 67 键见官方文档 [appendix/deprecated-application-properties/index](https://docs.spring.io/spring-boot/4.1.1/appendix/deprecated-application-properties.html)）：
 
 | 旧配置键（已剔除） | 替代配置键 | 说明 |
 | --- | --- | --- |
@@ -65,7 +65,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/appendix/deprecated-applicat
 | `spring.jackson.*` 二级序列化配置主体 | Jackson 3 命名空间（以官方 JSON 章为准） | Jackson 2 已弃用，将在未来 4.x 移除 |
 
 ::: tip 查全量废弃键
-本地镜像 `spring-boot-4.1.1-docs/appendix/deprecated-application-properties/index.md` 按 9 个分类列出全部 67 个废弃键及替代键；IDE 配置补全（基于配置元数据规范）会在输入旧键时直接标灰。
+官方文档 [appendix/deprecated-application-properties/index](https://docs.spring.io/spring-boot/4.1.1/appendix/deprecated-application-properties.html) 按 9 个分类列出全部 67 个废弃键及替代键；IDE 配置补全（基于配置元数据规范）会在输入旧键时直接标灰。
 :::
 
 ### 运维与工具
@@ -84,8 +84,8 @@ official: "https://docs.spring.io/spring-boot/4.1.1/appendix/deprecated-applicat
 - **验证手段**：全库 `grep "javax\."` 应为 0 命中；构建期开启 `-Werror` 让废弃 API 警告变错误。
 
 ::: info 官方出处
-- 废弃属性全清单：`spring-boot-4.1.1-docs/appendix/deprecated-application-properties/index.md`（67 键 / 9 分类）
-- 升级机制与迁移工具：`spring-boot-4.1.1-docs/upgrading.md`
-- Jackson 2 弃用原文：`spring-boot-4.1.1-docs/reference/features/json.md`
-- Zipkin 预告与 LiveReload 弃用：`spring-boot-4.1.1-docs/reference/actuator/tracing.md`、`reference/features/devtools.md`
+- 废弃属性全清单：[appendix/deprecated-application-properties/index](https://docs.spring.io/spring-boot/4.1.1/appendix/deprecated-application-properties.html)（67 键 / 9 分类）
+- 升级机制与迁移工具：`upgrading.md`
+- Jackson 2 弃用原文：[reference/features/json](https://docs.spring.io/spring-boot/4.1.1/reference/features/json.html)
+- Zipkin 预告与 LiveReload 弃用：[reference/actuator/tracing](https://docs.spring.io/spring-boot/4.1.1/reference/actuator/tracing.html)、[reference/features/devtools](https://docs.spring.io/spring-boot/4.1.1/reference/features/devtools.html)
 :::

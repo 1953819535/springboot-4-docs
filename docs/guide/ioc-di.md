@@ -375,13 +375,13 @@ public class ReportFacade {
 
 ### 延伸阅读
 
-官方镜像（本地 `spring-boot-4.1.1-docs/` 目录）：
+官方文档（在线）：
 
-- `reference/using/spring-beans-and-dependency-injection.md` —— 构造器注入与多构造器处理
-- `reference/using/auto-configuration.md` —— 自动配置的退位规则与排除方式
-- `reference/features/external-config.md` —— Type-safe Configuration Properties / 构造器绑定 / 默认值与校验各节
-- `specification/configuration-metadata/annotation-processor.md` —— configuration-processor 的 Maven/Gradle 接法
-- `appendix/dependency-versions/coordinates.md` —— starter 坐标清单
+- [reference/using/spring-beans-and-dependency-injection](https://docs.spring.io/spring-boot/4.1.1/reference/using/spring-beans-and-dependency-injection.html) —— 构造器注入与多构造器处理
+- [reference/using/auto-configuration](https://docs.spring.io/spring-boot/4.1.1/reference/using/auto-configuration.html) —— 自动配置的退位规则与排除方式
+- [reference/features/external-config](https://docs.spring.io/spring-boot/4.1.1/reference/features/external-config.html) —— Type-safe Configuration Properties / 构造器绑定 / 默认值与校验各节
+- [specification/configuration-metadata/annotation-processor](https://docs.spring.io/spring-boot/4.1.1/specification/configuration-metadata/annotation-processor.html) —— configuration-processor 的 Maven/Gradle 接法
+- [appendix/dependency-versions/coordinates](https://docs.spring.io/spring-boot/4.1.1/appendix/dependency-versions/coordinates.html) —— starter 坐标清单
 
 官网对应页：<https://docs.spring.io/spring-boot/4.1.1/reference/using/spring-beans-and-dependency-injection.html>
 

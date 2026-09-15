@@ -144,10 +144,10 @@ spring.quartz.properties.org.quartz.threadPool.threadCount=10
 
 ### 延伸阅读
 
-- 官方镜像：`spring-boot-4.1.1-docs/reference/io/quartz.md`（JobStore/数据源/属性透传/Job 注入全文）
+- 官方文档：[reference/io/quartz](https://docs.spring.io/spring-boot/4.1.1/reference/io/quartz.html)（JobStore/数据源/属性透传/Job 注入全文）
 - 站内：[批处理：Spring Batch](/practice/batch)（调度触发批任务的组合）、[虚拟线程深度实践](/practice/virtual-threads)（@Scheduled 与调度的分工）
 
 ::: info 官方出处
-- Starter 与自动拾取/持久化/集群：`spring-boot-4.1.1-docs/reference/io/quartz.md` 全文
+- Starter 与自动拾取/持久化/集群：[reference/io/quartz](https://docs.spring.io/spring-boot/4.1.1/reference/io/quartz.html) 全文
 - Job setter 注入示例原文：同文件 Java/Kotlin 双栏
 :::

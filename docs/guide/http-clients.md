@@ -332,8 +332,8 @@ spring:
 
 ### 延伸阅读
 
-- 官方镜像：`spring-boot-4.1.1-docs/reference/io/rest-client.md`——RestClient 定制/SSL、HTTP Service Interface Clients、Importing HTTP Services、Service Client Groups、全局配置与 SSRF 过滤
-- 官方镜像：`spring-boot-4.1.1-docs/reference/testing/spring-boot-applications.md`——`@RestClientTest` 切片与 `MockRestServiceServer` 完整规则
-- 官方镜像：`spring-boot-4.1.1-docs/appendix/application-properties/index.md`——`spring.http.clients.*` / `spring.http.serviceclient.*` 属性全集
+- 官方文档：[reference/io/rest-client](https://docs.spring.io/spring-boot/4.1.1/reference/io/rest-client.html)——RestClient 定制/SSL、HTTP Service Interface Clients、Importing HTTP Services、Service Client Groups、全局配置与 SSRF 过滤
+- 官方文档：[reference/testing/spring-boot-applications](https://docs.spring.io/spring-boot/4.1.1/reference/testing/spring-boot-applications.html)——`@RestClientTest` 切片与 `MockRestServiceServer` 完整规则
+- 官方文档：[appendix/application-properties/index](https://docs.spring.io/spring-boot/4.1.1/appendix/application-properties.html)——`spring.http.clients.*` / `spring.http.serviceclient.*` 属性全集
 - 站内：[内置 API 版本控制](/guide/api-versioning)（客户端携带版本）｜ [可观测性与 Actuator](/advanced/observability)（客户端指标）｜ [测试策略与 [Testcontainers](/glossary#testcontainers)](/advanced/testing)
 - 重试：Spring Retry 官方文档 <https://spring.io/projects/spring-retry>（Boot 不默认集成，需自行引入）

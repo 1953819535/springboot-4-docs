@@ -70,7 +70,7 @@ java -jar target/app.jar       # Gradle 产物在 build/libs/app.jar
 ```
 
 ::: tip 生产环境建议先解包再运行
-fat jar 的嵌套 jar 结构有轻微启动开销。执行 `java -Djarmode=tools -jar app.jar extract` 解包后用 `java -jar app/app.jar` 启动更快，且该布局对 AOT cache（与 CDS）友好。详见本地镜像 `spring-boot-4.1.1-docs/reference/packaging/efficient.md`。
+fat jar 的嵌套 jar 结构有轻微启动开销。执行 `java -Djarmode=tools -jar app.jar extract` 解包后用 `java -jar app/app.jar` 启动更快，且该布局对 AOT cache（与 CDS）友好。详见官方文档 [reference/packaging/efficient](https://docs.spring.io/spring-boot/4.1.1/reference/packaging/efficient.html)。
 :::
 
 ### 第二步：构建容器镜像
@@ -244,7 +244,7 @@ spec:
 | 容器镜像 | K8s 与云环境的默认载体：Buildpacks 省心，分层 Dockerfile 可控，环境一致 |
 | Native Image | GraalVM 编译，毫秒级启动、内存小；但构建链路独立、反射受限，属于进阶话题，本入门书不展开 |
 
-JDK 25 环境下的容器镜像还能顺带产出 AOT cache：构建阶段执行一次训练运行（`-XX:AOTCacheOutput=app.aot -Dspring.context.exit=onRefresh -jar application.jar`），运行阶段加 `-XX:AOTCache=app.aot` 显著缩短启动时间。完整模板见本地镜像 `spring-boot-4.1.1-docs/reference/packaging/container-images/dockerfiles.md` 的 AOT cache 一节。
+JDK 25 环境下的容器镜像还能顺带产出 AOT cache：构建阶段执行一次训练运行（`-XX:AOTCacheOutput=app.aot -Dspring.context.exit=onRefresh -jar application.jar`），运行阶段加 `-XX:AOTCache=app.aot` 显著缩短启动时间。完整模板见官方文档 [reference/packaging/container-images/dockerfiles](https://docs.spring.io/spring-boot/4.1.1/reference/packaging/container-images/dockerfiles.html) 的 AOT cache 一节。
 
 ## 关键注解与配置
 
@@ -276,13 +276,13 @@ JDK 25 环境下的容器镜像还能顺带产出 AOT cache：构建阶段执行
 
 ### 延伸阅读
 
-- 官方镜像：`spring-boot-4.1.1-docs/reference/packaging/container-images/dockerfiles.md`（分层 Dockerfile 与 AOT cache/CDS 模板）
-- 官方镜像：`spring-boot-4.1.1-docs/reference/packaging/container-images/cloud-native-buildpacks.md`（Buildpacks 与 lastModified 提示）
-- 官方镜像：`spring-boot-4.1.1-docs/reference/packaging/efficient.md`（解包部署布局）
-- 官方镜像：`spring-boot-4.1.1-docs/reference/web/graceful-shutdown.md`（优雅停机默认值与宽限期键）
-- 官方镜像：`spring-boot-4.1.1-docs/reference/actuator/endpoints.md`（K8s 探针健康组与 add-additional-paths）
-- 官方镜像：`spring-boot-4.1.1-docs/how-to/deployment/cloud.md`（preStop、terminationGracePeriodSeconds、buildpack 内存参数示例）
-- 官方镜像：`spring-boot-4.1.1-docs/how-to/deployment/installing.md`（systemd unit 全文）
-- 官方镜像：`spring-boot-4.1.1-docs/appendix/application-properties/index.md`（server.* 与 spring.lifecycle.* 默认值）
-- 官方镜像：`spring-boot-4.1.1-docs/maven-plugin/packaging.md`、`spring-boot-4.1.1-docs/gradle-plugin/packaging.md`（repackage 与 bootJar）
+- 官方文档：[reference/packaging/container-images/dockerfiles](https://docs.spring.io/spring-boot/4.1.1/reference/packaging/container-images/dockerfiles.html)（分层 Dockerfile 与 AOT cache/CDS 模板）
+- 官方文档：[reference/packaging/container-images/cloud-native-buildpacks](https://docs.spring.io/spring-boot/4.1.1/reference/packaging/container-images/cloud-native-buildpacks.html)（Buildpacks 与 lastModified 提示）
+- 官方文档：[reference/packaging/efficient](https://docs.spring.io/spring-boot/4.1.1/reference/packaging/efficient.html)（解包部署布局）
+- 官方文档：[reference/web/graceful-shutdown](https://docs.spring.io/spring-boot/4.1.1/reference/web/graceful-shutdown.html)（优雅停机默认值与宽限期键）
+- 官方文档：[reference/actuator/endpoints](https://docs.spring.io/spring-boot/4.1.1/reference/actuator/endpoints.html)（K8s 探针健康组与 add-additional-paths）
+- 官方文档：[how-to/deployment/cloud](https://docs.spring.io/spring-boot/4.1.1/how-to/deployment/cloud.html)（preStop、terminationGracePeriodSeconds、buildpack 内存参数示例）
+- 官方文档：[how-to/deployment/installing](https://docs.spring.io/spring-boot/4.1.1/how-to/deployment/installing.html)（systemd unit 全文）
+- 官方文档：[appendix/application-properties/index](https://docs.spring.io/spring-boot/4.1.1/appendix/application-properties.html)（server.* 与 spring.lifecycle.* 默认值）
+- 官方文档：`maven-plugin/packaging.md`、`gradle-plugin/packaging.md`（repackage 与 bootJar）
 - 站内：[可观测性与 Actuator](/advanced/observability) · [常见问题](/faq) · [配置项速查](/reference/api)

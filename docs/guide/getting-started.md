@@ -322,12 +322,12 @@ java -jar build/libs/demo-0.0.1-SNAPSHOT.jar
 
 ### 延伸阅读
 
-官方镜像（本地 `spring-boot-4.1.1-docs/` 目录）：
+官方文档（在线）：
 
-- `tutorial/first-application/index.md` —— 本页主线教程（Maven/Gradle 双版本）
+- [tutorial/first-application/index](https://docs.spring.io/spring-boot/4.1.1/tutorial/first-application.html) —— 本页主线教程（Maven/Gradle 双版本）
 - `system-requirements.md` —— Java/构建工具/Servlet 容器/GraalVM 版本矩阵
-- `reference/using/devtools.md` —— devtools 自动重启、触发文件、类加载诊断
-- `specification/executable-jar/index.md` —— 可执行 jar 与嵌套 jar 结构规范
+- [reference/using/devtools](https://docs.spring.io/spring-boot/4.1.1/reference/using/devtools.html) —— devtools 自动重启、触发文件、类加载诊断
+- [specification/executable-jar/index](https://docs.spring.io/spring-boot/4.1.1/specification/executable-jar.html) —— 可执行 jar 与嵌套 jar 结构规范
 
 官网对应页：<https://docs.spring.io/spring-boot/4.1.1/tutorial/first-application/index.html>
 

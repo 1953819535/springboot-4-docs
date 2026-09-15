@@ -229,7 +229,7 @@ Spring 容器 (ApplicationContext)
 ### 延伸阅读
 
 - 概念的完整展开散见各章：[IoC、依赖注入与配置绑定](/guide/ioc-di)、[内置 API 版本控制](/guide/api-versioning)、[数据访问与事务](/practice/data-access)、[测试策略](/advanced/testing)
-- 官方镜像：`spring-boot-4.1.1-docs/reference/`（各板块对应文件，页内"延伸阅读"逐页标注）
+- 官方文档：`reference/`（各板块对应文件，页内"延伸阅读"逐页标注）
 
 ::: info 官方出处
 本页为概念梳理页，定义以官方语料行为描述为准：Bean/DI/自动配置见 `reference/using/`，测试概念见 `reference/testing/`，部署概念见 `reference/packaging/`。

@@ -503,6 +503,6 @@ class MyGrpcTests {
 
 ### 延伸阅读
 
-- 官方镜像：`spring-boot-4.1.1-docs/reference/io/grpc.md`（本章全部事实来源）、`appendix/application-properties/index.md`（spring.grpc.*）、`appendix/dependency-coordinates/coordinates.md`（starter 坐标）
+- 官方文档：[reference/io/grpc](https://docs.spring.io/spring-boot/4.1.1/reference/io/grpc.html)（本章全部事实来源）、[appendix/application-properties/index](https://docs.spring.io/spring-boot/4.1.1/appendix/application-properties.html)（spring.grpc.*）、[appendix/dependency-coordinates/coordinates](https://docs.spring.io/spring-boot/4.1.1/appendix/dependency-coordinates/coordinates.html)（starter 坐标）
 - 官方在线：[gRPC 支持](https://docs.spring.io/spring-boot/4.1.1/reference/io/grpc.html) · [Spring gRPC 文档](https://docs.spring.io/spring-grpc/reference/1.1/) · [gRPC 核心概念](https://grpc.io/docs/what-is-grpc/core-concepts/) · [Status 码定义](https://grpc.io/docs/guides/error/)
 - 站内：[[虚拟线程](/glossary#虚拟线程-vs-平台线程)深度实践](/practice/virtual-threads)（上章）· [消息：Kafka、AMQP 与 JMS](/practice/messaging)（内部异步解耦）· [安全](/advanced/security)（@PreAuthorize 体系）

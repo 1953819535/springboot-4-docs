@@ -18,7 +18,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/appendix/application-propert
 
 本页是全站速查页：不展开原理，只给"查得到、抄得走"的三张表。选型与用法见各正文章节。
 
-本页是 4.1.1 基准下的速查表，即查即用不作展开；完整清单见官方镜像 `spring-boot-4.1.1-docs/appendix/`。
+本页是 4.1.1 基准下的速查表，即查即用不作展开；完整清单见官方镜像 `appendix/`。
 
 ## 极简实现
 
@@ -49,7 +49,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/appendix/application-propert
 | `spring-boot-starter-test` | 测试：JUnit 5、[Mockito](/glossary#mock)、MockMvc、AssertJ |
 
 ::: tip 命名规律与测试配套
-4.x 给每个 starter 提供成对的 `-test` 变体（如 `starter-webmvc-test`）；日常全栈测试从 `starter-test` 起步即可，全套清单见官方镜像 `appendix/dependency-versions/coordinates.md`。
+4.x 给每个 starter 提供成对的 `-test` 变体（如 `starter-webmvc-test`）；日常全栈测试从 `starter-test` 起步即可，全套清单见官方镜像 [appendix/dependency-versions/coordinates](https://docs.spring.io/spring-boot/4.1.1/appendix/dependency-versions/coordinates.html)。
 :::
 
 ### 常用命令
@@ -142,7 +142,7 @@ java -jar target/app.jar  # 运行产物
 
 ### 高频配置项速查
 
-以下默认值摘自官方镜像 `appendix/application-properties/index.md`，标"—"表示官方未给默认值（随环境自动判定），标"※"表示附录未列默认值、以官方附录页面为准：
+以下默认值摘自官方镜像 [appendix/application-properties/index](https://docs.spring.io/spring-boot/4.1.1/appendix/application-properties.html)，标"—"表示官方未给默认值（随环境自动判定），标"※"表示附录未列默认值、以官方附录页面为准：
 
 #### 服务器与停机
 
@@ -246,19 +246,19 @@ java -jar target/app.jar  # 运行产物
 ## 避坑指南
 
 ::: warning 已废弃配置项不收录
-本页只收 4.1.1 现行键。迁移老项目遇到"配置不生效"时，先查官方镜像 `appendix/deprecated-application-properties/index.md`——键被改名或删除时启动日志会给出提示，迁移期可临时加 `spring-boot-properties-migrator` 依赖辅助诊断。
+本页只收 4.1.1 现行键。迁移老项目遇到"配置不生效"时，先查官方镜像 [appendix/deprecated-application-properties/index](https://docs.spring.io/spring-boot/4.1.1/appendix/deprecated-application-properties.html)——键被改名或删除时启动日志会给出提示，迁移期可临时加 `spring-boot-properties-migrator` 依赖辅助诊断。
 :::
 
 - **旧名 starter 不要抄网上教程**：3.x 及更早教程里的旧名在 4.x 已由现行名取代（对照见[废弃项清理清单](/reference/cleanup)）；表内注解本体属 Spring Framework 7 / Jakarta Validation 等上游项目，逐注解用法查上游 Javadoc。
-- **默认值随依赖变化**：如 `spring.jpa.hibernate.ddl-auto` 内嵌库与外部库默认不同——按项目实际依赖理解"默认值"。遇到冷门键直接搜官方镜像 `appendix/application-properties/index.md`，别凭印象猜键名。
+- **默认值随依赖变化**：如 `spring.jpa.hibernate.ddl-auto` 内嵌库与外部库默认不同——按项目实际依赖理解"默认值"。遇到冷门键直接搜官方镜像 [appendix/application-properties/index](https://docs.spring.io/spring-boot/4.1.1/appendix/application-properties.html)，别凭印象猜键名。
 
 ### 延伸阅读
 
-- 官方镜像：`spring-boot-4.1.1-docs/appendix/application-properties/index.md`（属性默认值唯一权威来源）
-- 官方镜像：`spring-boot-4.1.1-docs/appendix/dependency-versions/coordinates.md`（starter 全集坐标）
-- 官方镜像：`spring-boot-4.1.1-docs/appendix/auto-configuration-classes/index.md`（自动配置模块清单）
-- 官方镜像：`spring-boot-4.1.1-docs/appendix/deprecated-application-properties/index.md`（废弃键对照）
-- 官方镜像：`spring-boot-4.1.1-docs/appendix/test-auto-configuration/slices.md`（测试切片注解）
-- 官方镜像：`spring-boot-4.1.1-docs/reference/features/json.md`（@JacksonComponent 与 Jackson 3）
+- 官方文档：[appendix/application-properties/index](https://docs.spring.io/spring-boot/4.1.1/appendix/application-properties.html)（属性默认值唯一权威来源）
+- 官方文档：[appendix/dependency-versions/coordinates](https://docs.spring.io/spring-boot/4.1.1/appendix/dependency-versions/coordinates.html)（starter 全集坐标）
+- 官方文档：[appendix/auto-configuration-classes/index](https://docs.spring.io/spring-boot/4.1.1/appendix/auto-configuration-classes.html)（自动配置模块清单）
+- 官方文档：[appendix/deprecated-application-properties/index](https://docs.spring.io/spring-boot/4.1.1/appendix/deprecated-application-properties.html)（废弃键对照）
+- 官方文档：[appendix/test-auto-configuration/slices](https://docs.spring.io/spring-boot/4.1.1/appendix/test-auto-configuration/slices.html)（测试切片注解）
+- 官方文档：[reference/features/json](https://docs.spring.io/spring-boot/4.1.1/reference/features/json.html)（@JacksonComponent 与 Jackson 3）
 - 官网：<https://docs.spring.io/spring-boot/4.1.1/appendix/application-properties.html>
 - 站内：[废弃项清理与变更对照清单](/reference/cleanup) · [常见问题](/faq) · [可观测性](/advanced/observability)

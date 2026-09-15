@@ -264,7 +264,7 @@ public void onOrderEvent(OrderEvent event) {
 
 ### 延伸阅读
 
-- 官方镜像：`spring-boot-4.1.1-docs/reference/features/spring-application.md`（Virtual threads 节）、`appendix/application-properties/index.md`（spring.threads.* / spring.task.* 键值）
+- 官方文档：[reference/features/spring-application](https://docs.spring.io/spring-boot/4.1.1/reference/features/spring-application.html)（Virtual threads 节）、[appendix/application-properties/index](https://docs.spring.io/spring-boot/4.1.1/appendix/application-properties.html)（spring.threads.* / spring.task.* 键值）
 - 官方在线：[Spring Boot 4.1.1 – Virtual threads](https://docs.spring.io/spring-boot/4.1.1/reference/features/spring-application.html#features.spring-application.virtual-threads)
 - Oracle 官方虚拟线程文档（语料引用，含 JFR/jcmd 检测说明）：[Virtual Threads (JDK 24)](https://docs.oracle.com/en/java/javase/24/core/virtual-threads.html)，JDK 25 行为以对应版本文档为准
 - 站内：[HTTP 客户端三件套](/guide/http-clients)（下一章）· [数据访问与事务](/practice/data-access)（连接池配套）· [消息：Kafka、AMQP 与 JMS](/practice/messaging)（监听容器并发）

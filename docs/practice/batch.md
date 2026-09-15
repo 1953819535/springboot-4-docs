@@ -168,10 +168,10 @@ public class NightlyJobRunner {
 
 ### 延伸阅读
 
-- 官方镜像：`spring-boot-4.1.1-docs/reference/io/spring-batch.md`（自动配置存储/启动执行/多 Job 选择）
+- 官方文档：[reference/io/spring-batch](https://docs.spring.io/spring-boot/4.1.1/reference/io/spring-batch.html)（自动配置存储/启动执行/多 Job 选择）
 - 站内：[数据访问与事务](/practice/data-access)（chunk 事务与 JdbcClient 读写）、[消息：Kafka、AMQP 与 JMS](/practice/messaging)（异构系统解耦的另一半答案）
 
 ::: info 官方出处
-- 自动配置存储与启动执行：`spring-boot-4.1.1-docs/reference/io/spring-batch.md` 全文
-- 元数据表前缀：`spring-boot-4.1.1-docs/appendix/application-properties/index.md`（`spring.batch.jdbc.*`）
+- 自动配置存储与启动执行：[reference/io/spring-batch](https://docs.spring.io/spring-boot/4.1.1/reference/io/spring-batch.html) 全文
+- 元数据表前缀：[appendix/application-properties/index](https://docs.spring.io/spring-boot/4.1.1/appendix/application-properties.html)（`spring.batch.jdbc.*`）
 :::

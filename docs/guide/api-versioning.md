@@ -316,8 +316,8 @@ public UserResponseV11 getV11(long id) {
 
 ### 延伸阅读
 
-- 官方镜像：`spring-boot-4.1.1-docs/reference/web/servlet.md`（API Versioning 节）；响应式对称支持见 `reference/web/reactive.md`
-- 官方镜像：`spring-boot-4.1.1-docs/reference/io/rest-client.md`（API Versioning 节——客户端侧配置与"服务端配置不自动生效"提示）
-- 官方镜像：`spring-boot-4.1.1-docs/appendix/application-properties/index.md`——`spring.mvc.apiversion.*` / `spring.webflux.apiversion.*` / `spring.http.serviceclient.*` 属性全集
+- 官方文档：[reference/web/servlet](https://docs.spring.io/spring-boot/4.1.1/reference/web/servlet.html)（API Versioning 节）；响应式对称支持见 [reference/web/reactive](https://docs.spring.io/spring-boot/4.1.1/reference/web/reactive.html)
+- 官方文档：[reference/io/rest-client](https://docs.spring.io/spring-boot/4.1.1/reference/io/rest-client.html)（API Versioning 节——客户端侧配置与"服务端配置不自动生效"提示）
+- 官方文档：[appendix/application-properties/index](https://docs.spring.io/spring-boot/4.1.1/appendix/application-properties.html)——`spring.mvc.apiversion.*` / `spring.webflux.apiversion.*` / `spring.http.serviceclient.*` 属性全集
 - 站内：[HTTP 客户端三件套](/guide/http-clients)（客户端封装与测试）｜ [REST API 开发全规范](/guide/rest-api)（错误响应格式）｜ [废弃项清理清单](/reference/cleanup)
 - Spring Framework 7 版本映射详解：<https://docs.spring.io/spring-framework/reference/7.0/web/webmvc/mvc-controller/ann-requestmapping.html#mvc-ann-requestmapping-version>

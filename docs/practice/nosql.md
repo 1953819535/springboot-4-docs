@@ -251,6 +251,6 @@ public interface CityRepository extends Neo4jRepository<City, Long> {
 
 ### 延伸阅读
 
-- 官方镜像：`spring-boot-4.1.1-docs/reference/data/nosql.md`（工作区语料，含全部存储的连接属性示例）
+- 官方文档：[reference/data/nosql](https://docs.spring.io/spring-boot/4.1.1/reference/data/nosql.html)（工作区语料，含全部存储的连接属性示例）
 - 官方原文：[Working with NoSQL Technologies](https://docs.spring.io/spring-boot/4.1.1/reference/data/nosql.html)
 - 站内相关：[关系型数据访问](/practice/data-access) ｜ [缓存实战（Redis）](/practice/caching) ｜ [测试策略（Testcontainers）](/advanced/testing)

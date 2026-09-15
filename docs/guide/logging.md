@@ -243,6 +243,6 @@ Logstash：{"@timestamp":"...","@version":"1","message":"...","logger_name":"org
 
 ### 延伸阅读
 
-- 官方镜像：`spring-boot-4.1.1-docs/reference/features/logging.md`（工作区语料，含全部属性表）
+- 官方文档：[reference/features/logging](https://docs.spring.io/spring-boot/4.1.1/reference/features/logging.html)（工作区语料，含全部属性表）
 - 官方原文：[Logging](https://docs.spring.io/spring-boot/4.1.1/reference/features/logging.html)
 - 站内进阶：[可观测性（Actuator 与 Tracing）](/advanced/observability) ｜ [外部化配置](/guide/configuration) ｜ [虚拟线程实战](/practice/virtual-threads)
