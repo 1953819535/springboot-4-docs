@@ -1,0 +1,116 @@
+/* 《现代 Spring Boot 快速入门》— Preset 11 Build 奢侈极简
+   70%+ 留白 · 字重 200–600 微妙对比 · 单一强调色（Spring 绿）· 呼吸感节奏 */
+
+:root {
+  /* 单一强调色：Spring 品牌绿（沿用既有品牌认知，克制使用） */
+  --vp-c-brand-1: #4e8a2e;
+  --vp-c-brand-2: #44802a;
+  --vp-c-brand-3: #6db33f;
+  --vp-c-brand-soft: rgba(109, 179, 63, 0.10);
+
+  /* 首页 hero：极简，不做渐变名，字重对比说话 */
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: transparent;
+
+  /* Build DNA：大留白、细 hairline、安静的代码底色 */
+  --vp-code-block-bg: #f7f8f7;
+  --vp-c-text-1: #1b1f1c;
+  --vp-c-text-2: #4a504c;
+  --vp-c-text-3: #8b918c;
+
+  /* 文档正文排版呼吸感 */
+  --vp-font-family-base: "Segoe UI", "PingFang SC", "Microsoft YaHei",
+    "Helvetica Neue", sans-serif;
+  --vp-content-line-height: 1.75;
+}
+
+.dark {
+  --vp-c-brand-1: #86c867;
+  --vp-c-brand-2: #9ad17e;
+  --vp-c-brand-3: #6db33f;
+  --vp-c-brand-soft: rgba(134, 200, 103, 0.14);
+  --vp-code-block-bg: #161b16;
+  --vp-c-text-1: #eceeea;
+  --vp-c-text-2: #b3b8b2;
+  --vp-c-text-3: #7c827c;
+}
+
+/* ── 首页 Hero：Build 式极简 ── */
+.VPHero .name,
+.VPHero .text {
+  letter-spacing: -0.02em;
+}
+.VPHero .name {
+  font-weight: 200;
+}
+.VPHero .text {
+  font-weight: 600;
+}
+.VPHero .tagline {
+  font-weight: 300;
+  line-height: 1.8;
+  max-width: 620px;
+}
+
+/* 首页特性卡：去卡片感，改为 hairline 分隔的留白网格 */
+.VPFeature {
+  border: none !important;
+  border-top: 1px solid var(--vp-c-divider) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding-top: 18px !important;
+  transition: border-color 0.25s;
+}
+.VPFeature:hover {
+  border-top-color: var(--vp-c-brand-1) !important;
+}
+.VPFeature .title {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.VPFeature .details {
+  color: var(--vp-c-text-2);
+  font-weight: 300;
+}
+
+/* 正文：标题字重梯度（600/500/500），小节间距放大 */
+.vp-doc h1 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.vp-doc h2 {
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  margin-top: 48px;
+  border-top: 1px solid var(--vp-c-divider);
+  padding-top: 24px;
+}
+.vp-doc h3 {
+  font-weight: 500;
+}
+.vp-doc p {
+  line-height: 1.8;
+}
+
+/* 自定义容器：更安静（Build 极简） */
+.vp-doc .tip,
+.vp-doc .warning,
+.vp-doc .info,
+.vp-doc .danger {
+  border-radius: 0;
+}
+
+/* 表格：hairline 风格 */
+.vp-doc table {
+  border-collapse: collapse;
+}
+.vp-doc th {
+  font-weight: 500;
+  color: var(--vp-c-text-2);
+}
+
+/* 代码组标签条：极简化 */
+.vp-code-group .tabs label {
+  font-weight: 400;
+}
