@@ -1,5 +1,5 @@
 ---
-title: "注解、[Starter](/glossary#starter) 与配置项速查"
+title: "注解、Starter 与配置项速查"
 description: "Spring Boot 4.1.1 常用注解、现行 Starter 名称与高频配置项速查表（约 40 键，含官方默认值），按场景分组即查即用。"
 official: "https://docs.spring.io/spring-boot/4.1.1/appendix/application-properties/index.html"
 ---
@@ -30,7 +30,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/appendix/application-propert
 | --- | --- |
 | `spring-boot-starter-webmvc` | Spring MVC REST/页面服务（旧名对照见 [废弃项清理清单](/reference/cleanup)） |
 | `spring-boot-starter-webflux` | 响应式 Web（Reactor Netty） |
-| `spring-boot-starter-validation` | [Bean](/glossary#bean) Validation（Jakarta Validation） |
+| `spring-boot-starter-validation` | Bean Validation（Jakarta Validation） |
 | `spring-boot-starter-data-jpa` | JPA 数据访问（[HikariCP](/glossary#连接池hikaricp) + Hibernate） |
 | `spring-boot-starter-jdbc` | JDBC 数据访问 |
 | `spring-boot-starter-data-redis` | Redis 访问（Lettuce） |

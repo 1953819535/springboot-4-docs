@@ -1,6 +1,6 @@
 ---
 title: 安全（Security）
-description: Spring Boot 4.1.1 安全实战：默认安全行为、SecurityFilterChain 授权规则、OAuth2 Resource Server [JWT](/glossary#jwt--csrf--cors-速记) 主路线、自有用户表登录与自签 JWT、CORS、方法级授权与安全测试。
+description: Spring Boot 4.1.1 安全实战：默认安全行为、SecurityFilterChain 授权规则、OAuth2 Resource Server JWT 主路线、自有用户表登录与自签 JWT、CORS、方法级授权与安全测试。
 official: https://docs.spring.io/spring-boot/4.1.1/reference/web/spring-security.html
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "[虚拟线程](/glossary#虚拟线程-vs-平台线程)深度实践"
+title: "虚拟线程深度实践"
 description: "在 Spring Boot 4.1.1 中开启虚拟线程：适用场景判断表、各组件行为变化、pinning 检测、@Async 完整例与连接池并发匹配算术，以及生产避坑清单。"
 official: "https://docs.spring.io/spring-boot/4.1.1/reference/features/spring-application.html#features.spring-application.virtual-threads"
 ---

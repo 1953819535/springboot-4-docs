@@ -82,7 +82,7 @@ JobDetail 与 Trigger 声明为 Bean 后**自动被调度器拾取**，无需手
 @Configuration
 public class QuartzConfig {
 
-    @[Bean](/glossary#bean)
+    @Bean
     public org.quartz.JobDetail reportJobDetail() {
         return org.quartz.JobBuilder.newJob(ReportJob.class)
                 .withIdentity("reportJob")

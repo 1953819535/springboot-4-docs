@@ -1,6 +1,6 @@
 ---
 title: "HTTP 客户端三件套：RestClient 与声明式 @HttpExchange"
-description: "RestClient 同步调用、全动词与错误处理分层、企业级统一封装、@HttpExchange 声明式客户端与分组配置、超时三层概念与[切片测试](/glossary#切片测试test-slice)。"
+description: "RestClient 同步调用、全动词与错误处理分层、企业级统一封装、@HttpExchange 声明式客户端与分组配置、超时三层概念与切片测试。"
 official: "https://docs.spring.io/spring-boot/4.1.1/reference/io/rest-client.html"
 ---
 
@@ -239,7 +239,7 @@ class WeatherServiceTests {
 @Configuration(proxyBeanMethods = false)
 public class RestClientConfig {
 
-    @[Bean](/glossary#bean)
+    @Bean
     RestClient weatherRestClient(RestClient.Builder builder) {
         return builder
                 .baseUrl("https://api.weather.example")

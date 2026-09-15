@@ -222,7 +222,7 @@ public class ApiVersioningConfig implements WebMvcConfigurer {
 内置解析器覆盖不了的场景（如自研网关注入的私有头、多套头名兼容），实现 `ApiVersionResolver` Bean 注入自动配置——只有一个方法 `resolveVersion(HttpServletRequest)`，返回版本字符串或 `null`（`null` 表示未携带版本，交给 `default` / `required` 处理）：
 
 ```java
-@[Bean](/glossary#bean)
+@Bean
 ApiVersionResolver gatewayVersionResolver() {
     // 先从网关注入的私有头取版本，缺失时回落到标准 X-Version
     return request -> {
@@ -239,7 +239,7 @@ ApiVersionResolver gatewayVersionResolver() {
 弃用不是删代码，是**先通知、再观察、后停用**。框架提供 `StandardApiVersionDeprecationHandler`：为指定版本声明弃用日期、迁移文档链接与停用（Sunset）日期，命中该版本的请求会带上弃用提示头（如 `Deprecation`、`Sunset`）：
 
 ```java
-@[Bean](/glossary#bean)
+@Bean
 StandardApiVersionDeprecationHandler apiVersionDeprecationHandler() {
     StandardApiVersionDeprecationHandler handler = new StandardApiVersionDeprecationHandler();
     handler.configureVersion("1.0")                // 声明弃用 1.0 版
@@ -257,7 +257,7 @@ StandardApiVersionDeprecationHandler apiVersionDeprecationHandler() {
 手动 `.header(...)` 的版本会散落在每个调用点。企业封装把**插入器 + 默认版本**收敛到客户端构建处：`apiVersionInserter` 决定版本放哪里（必须与服务器解析策略对齐），`defaultApiVersion` 决定缺省值：
 
 ```java
-@[Bean](/glossary#bean)
+@Bean
 RestClient userRestClient(RestClient.Builder builder) {
     return builder
             .baseUrl("https://api.user.example")

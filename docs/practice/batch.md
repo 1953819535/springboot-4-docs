@@ -54,7 +54,7 @@ Spring Boot 对 Batch 的核心便利：**上下文里只有一个 Job Bean 时�
 @Configuration
 public class OrderImportJobConfig {
 
-    @[Bean](/glossary#bean)
+    @Bean
     public Job orderImportJob(JobRepository jobRepository, Step importStep) {
         return new JobBuilder("orderImportJob", jobRepository)
                 .start(importStep)

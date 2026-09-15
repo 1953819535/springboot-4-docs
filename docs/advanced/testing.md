@@ -1,5 +1,5 @@
 ---
-title: "测试策略与 [Testcontainers](/glossary#testcontainers)"
+title: "测试策略与 Testcontainers"
 description: "Spring Boot 4.1.1 测试实战：测试金字塔分层、不启 Spring 的纯单元测试、@WebMvcTest/@DataJpaTest/@JsonTest 切片全家福、MockMvcTester 断言、Testcontainers 与 @ServiceConnection、测试配置隔离与数据清理策略。"
 official: "https://docs.spring.io/spring-boot/4.1.1/reference/testing/index.html"
 ---
@@ -180,7 +180,7 @@ class UserResponseJsonTest {
 
 ```java
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@[Testcontainers](/glossary#testcontainers)
+@Testcontainers
 class UserFlowIT {
 
     @Container
@@ -284,7 +284,7 @@ class WithNestedConfigTests {
 
     @TestConfiguration(proxyBeanMethods = false)
     static class FixedClockConfig {
-        @[Bean](/glossary#bean)
+        @Bean
         Clock clock() { return Clock.fixed(Instant.parse("2026-01-01T00:00:00Z"), ZoneOffset.UTC); }
     }
 

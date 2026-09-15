@@ -1,6 +1,6 @@
 ---
 title: "数据访问实践"
-description: "Spring Boot 4.1.1 数据访问深扩：JdbcClient 全 API 增删改查与 record 映射、JPA 企业形态（审计/Pageable/EntityGraph/投影）、事务属性与失效五坑、多数据源骨架与 [Flyway](/glossary#flyway-与数据库迁移) 规范。"
+description: "Spring Boot 4.1.1 数据访问深扩：JdbcClient 全 API 增删改查与 record 映射、JPA 企业形态（审计/Pageable/EntityGraph/投影）、事务属性与失效五坑、多数据源骨架与 Flyway 规范。"
 official: "https://docs.spring.io/spring-boot/4.1.1/reference/data/sql.html"
 ---
 
@@ -245,7 +245,7 @@ public class Order {
 @Configuration
 @EnableJpaAuditing
 public class JpaAuditingConfig {
-    @[Bean](/glossary#bean)
+    @Bean
     public AuditorAware<String> auditor() {
         return () -> Optional.of("system"); // 生产中从登录态取当前用户
     }
@@ -418,7 +418,7 @@ JPA 多库还需各配一套 EntityManagerFactory + 事务管理器，仓储用 
 public class SecondJpaConfiguration {
 
     @Qualifier("second")
-    @[Bean](/glossary#bean)(defaultCandidate = false)
+    @Bean(defaultCandidate = false)
     public LocalContainerEntityManagerFactoryBean secondEntityManagerFactory(
             @Qualifier("second") DataSource dataSource, @Qualifier("second") JpaProperties jpaProperties) {
         EntityManagerFactoryBuilder builder =

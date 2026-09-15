@@ -1,6 +1,6 @@
 ---
 title: "REST API 开发全规范"
-description: "@RestController + record [DTO](/glossary#dto)、完整分层链路、文件上传下载、分页排序、ProblemDetail 统一异常与 CORS，一套可上生产的 REST 规范。"
+description: "@RestController + record DTO、完整分层链路、文件上传下载、分页排序、ProblemDetail 统一异常与 CORS，一套可上生产的 REST 规范。"
 official: "https://docs.spring.io/spring-boot/4.1.1/reference/web/servlet.html"
 ---
 
@@ -255,7 +255,7 @@ public class UserController {
 }
 ```
 
-```java [入参与视图 [DTO](/glossary#dto)]
+```java [入参与视图 DTO]
 public record CreateUserRequest(@NotBlank String username, @Email String email) {}
 
 public record UserView(Long id, String username, String email, java.time.Instant createdAt) {
@@ -421,7 +421,7 @@ public class GlobalExceptionHandler {
 @Configuration(proxyBeanMethods = false)
 public class CorsConfiguration {
 
-    @[Bean](/glossary#bean)
+    @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
