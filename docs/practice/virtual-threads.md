@@ -11,7 +11,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/reference/features/spring-ap
 > - 虚拟线程 × 数据库连接池的并发匹配算术：1000 个虚拟线程在 10 个连接前的排队真相
 > - 生产环境 7 条避坑清单
 
-> **下一章**：[HTTP 客户端三件套](/guide/http-clients)>
+> **下一章**：[HTTP 客户端三件套](/guide/http-clients)
 
 ## 业务场景
 

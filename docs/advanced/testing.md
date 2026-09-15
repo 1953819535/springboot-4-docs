@@ -7,7 +7,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/reference/testing/index.html
 # 测试策略与 Testcontainers
 
 > **本章你会学到**：如何按测试金字塔分配单元/切片/集成三层用例；不启动 Spring 的纯 JUnit + AssertJ 写法；`@WebMvcTest`、`@DataJpaTest`、`@JsonTest` 等切片的最小完整例；`MockMvcTester` 的 AssertJ 断言语法；Testcontainers 连真实数据库以及 `@ServiceConnection` 的能力清单；测试配置隔离与测试数据清理的选型。
-> 上一章：[安全](/advanced/security) ｜ 下一章：[可观测性](/advanced/observability)
+> **上一章**：[安全与鉴权](/advanced/security) · **下一章**：[可观测性与 Actuator 生产参数](/advanced/observability)
 
 ## 业务场景
 

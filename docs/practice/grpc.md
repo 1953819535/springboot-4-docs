@@ -13,7 +13,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/reference/io/grpc.html"
 > - deadline/超时传递建议、与 REST 共存的端口策略（独立端口 vs Servlet 同端口）
 > - in-process 测试传输、proto 演进纪律（字段编号永不复用）
 
-> **上一章**：[内置 API 版本控制](/guide/api-versioning) · **下一章**：[消息：Kafka、AMQP 与 JMS](/practice/messaging)>
+> **上一章**：[内置 API 版本控制](/guide/api-versioning) · **下一章**：[消息：Kafka、AMQP 与 JMS](/practice/messaging)
 
 ## 业务场景
 

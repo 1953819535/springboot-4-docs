@@ -15,7 +15,6 @@ official: "https://docs.spring.io/spring-boot/4.1.1/reference/io/caching.html"
 - Redis 缓存 TTL 按缓存名差异化、JSON 序列化完整配置
 - 缓存一致性策略：先更库后删缓存、短 TTL 兜底、什么时候不该用缓存
 
-> 上一步：[数据访问与事务](/practice/data-access) ｜ 下一步：[安全与鉴权](/advanced/security)
 
 > **上一章**：[数据访问与事务](/practice/data-access) · **下一章**：[NoSQL：MongoDB 与更多](/practice/nosql)
 

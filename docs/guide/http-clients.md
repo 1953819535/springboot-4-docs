@@ -14,7 +14,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/reference/io/rest-client.htm
 > - 用 `@HttpExchange` 接口 + 逻辑组（group）构建可测试的声明式客户端
 > - 超时的三层概念（连接/读/全局兜底），以及每一层在哪配
 >
-> 上一章：[虚拟线程深度实践](/practice/virtual-threads) ｜ 下一章：[内置 API 版本控制](/guide/api-versioning)
+> **上一章**：[虚拟线程深度实践](/practice/virtual-threads) · **下一章**：[内置 API 版本控制](/guide/api-versioning)
 
 ## 业务场景
 

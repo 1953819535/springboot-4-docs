@@ -14,7 +14,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/reference/web/servlet.html"
 > - 用 `ApiVersionDeprecationHandler` 做"先提示、后停用"的优雅弃用
 > - 客户端（RestClient/WebClient）如何与服务器策略对齐地携带版本
 >
-> 上一章：[HTTP 客户端三件套](/guide/http-clients) ｜ 下一章：[Spring gRPC 服务](/practice/grpc)
+> **上一章**：[HTTP 客户端三件套](/guide/http-clients) · **下一章**：[Spring gRPC 服务](/practice/grpc)
 
 ## 业务场景
 
