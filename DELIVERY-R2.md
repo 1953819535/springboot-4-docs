@@ -72,3 +72,15 @@ guide/getting-started.md、guide/ioc-di.md、guide/configuration.md、guide/rest
 3. **流程图**：手绘 4 张统一风格 SVG（Spring 品牌绿、Build 极简风）嵌入对应章节——security（JWT 认证时序）、batch（chunk 执行模型与容错）、virtual-threads（虚拟线程 vs 平台线程阻塞行为）、configuration（配置覆盖顺序）。
 
 复验：构建通过（11.73s，dist 26 页含 4 图），红线 0 命中，导航审计沿用归零态。
+## 七轮 Windows/PowerShell 命令变体（2026-09-15）
+
+用户要求补 Windows/PowerShell 命令变体。完成：
+
+- `guide/getting-started.md`：Initializr 下载 → PowerShell `Invoke-WebRequest` 对照（bash/PowerShell code-group）
+- `advanced/observability.md`：loggers 运行期调级 GET/POST → `Invoke-RestMethod` 对照（反引号续行 + effectiveLevel 直取）
+- `guide/configuration.md`：三处环境变量命令（SERVER_PORT 临时覆盖 / SPRING_APPLICATION_JSON / DB_PASSWORD 敏感值注入）→ `$env:` 变体，单引号 JSON 语义差异标注
+- `practice/grpc.md`：grpcurl 的 PowerShell 引号转义 tip（`-d @request.json` 文件引用法）
+
+顺带完成导航一致性收尾：6 处措辞变体（上一步/📍上章/嵌套链接）统一为标准「上一章/下一章」形态，术语自动链接造成的 7 文件嵌套链接与 6 处标题误链已清理。
+
+复验：构建 9.62s 通过（0 死链）、红线 0 命中、nav_audit4 归零。Git 提交 09c48f6。
