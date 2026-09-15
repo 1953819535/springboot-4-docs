@@ -8,10 +8,13 @@ export default defineConfig({
   title: '现代 Spring Boot 快速入门',
   description: '面向新手的现代 Spring Boot 4.1.1 企业实战手册：JDK 25 虚拟线程、声明式 HTTP 客户端、API 版本控制、gRPC、生产级安全与可观测性',
 
+  // GitHub Pages 项目站点子路径（仓库名）——本地 docs:dev 预览不受影响
+  base: '/springboot-4-docs/',
+
   // 教程正文里的 localhost 示例链接不做死链检查
   ignoreDeadLinks: [/^https?:\/\/localhost/],
 
-  head: [['link', { rel: 'icon', type: 'image/svg+xml', href: '/leaf.svg' }]],
+  head: [['link', { rel: 'icon', type: 'image/svg+xml', href: '/springboot-4-docs/leaf.svg' }]],
 
   themeConfig: {
     // 顶部导航栏
