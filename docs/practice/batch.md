@@ -54,7 +54,7 @@ Spring Boot 对 Batch 的核心便利：**上下文里只有一个 Job Bean 时�
 @Configuration
 public class OrderImportJobConfig {
 
-    @Bean
+    @[Bean](/glossary#bean)
     public Job orderImportJob(JobRepository jobRepository, Step importStep) {
         return new JobBuilder("orderImportJob", jobRepository)
                 .start(importStep)
@@ -117,6 +117,10 @@ spring.batch.job.enabled=true
 :::
 
 ## 关键注解与配置
+
+下图是 chunk 执行模型与容错策略的全貌：
+
+![下图是 chunk 执行模型与容错策略的全貌](/diagrams/batch-chunk.svg)
 
 | 注解 / 配置键 | 作用 | 要点 |
 | --- | --- | --- |

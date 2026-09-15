@@ -117,9 +117,13 @@ java -jar app.jar --spring.profiles.active=prod
 - 多个 profile 用逗号分隔：`--spring.profiles.active=prod,live`，**后者优先**（last-wins）；
 - `spring.profiles.include` 是"追加"而非替换，且被追加的 profile 在 active 之前生效；
 - **profile groups** 把一组细粒度 profile 打包成一个逻辑名：`spring.profiles.group.production=proddb,prodmq` 之后，`--spring.profiles.active=production` 一发激活全部；
-- Bean 级隔离用 `@Profile("prod")` 标在 `@Configuration`/`@Component` 上。
+- [Bean](/glossary#bean) 级隔离用 `@Profile("prod")` 标在 `@Configuration`/`@Component` 上。
 
 ## 关键注解与配置
+
+下图按优先级从低到高排列配置来源——后加载者覆盖先加载者：
+
+![下图按优先级从低到高排列配置来源——后加载者覆盖先加载者](/diagrams/config-precedence.svg)
 
 | 配置/注解 | 作用 |
 | --- | --- |
@@ -319,4 +323,4 @@ spring:
 
 官网对应页：<https://docs.spring.io/spring-boot/4.1.1/reference/features/external-config.html>
 
-站内相关页：[IoC 与依赖注入](/guide/ioc-di) · [REST API 开发全规范](/guide/rest-api) · [可观测性](/advanced/observability)
+站内相关页：[[IoC](/glossary#ioc-容器与-ioc-容器) 与依赖注入](/guide/ioc-di) · [REST API 开发全规范](/guide/rest-api) · [可观测性](/advanced/observability)

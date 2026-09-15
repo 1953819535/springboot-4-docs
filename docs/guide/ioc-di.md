@@ -1,6 +1,6 @@
 ---
-title: "IoC 与依赖注入：装配你的业务组件"
-description: "构造器注入、三种注入方式对比、@Bean 装配第三方对象、record 类型安全配置绑定与条件装配，用 4.1.1 的方式组织业务代码。"
+title: "[IoC](/glossary#ioc-容器与-ioc-容器) 与依赖注入：装配你的业务组件"
+description: "构造器注入、三种注入方式对比、@[Bean](/glossary#bean) 装配第三方对象、record 类型安全配置绑定与条件装配，用 4.1.1 的方式组织业务代码。"
 official: "https://docs.spring.io/spring-boot/4.1.1/reference/using/spring-beans-and-dependency-injection.html"
 ---
 
@@ -81,7 +81,7 @@ public class UserService {
 
     public UserService() { }   // 必须有无参构造器：Spring 先 new 再调 setter
 
-    @Autowired(required = false)   // required=false：容器里没有该 Bean 也不报错
+    @Autowired(required = false)   // required=false：容器里没有该 [Bean](/glossary#bean) 也不报错
     public void setUserRepository(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -184,7 +184,7 @@ long backoffMillis(OrderProperties props) {
 public class ClientConfiguration {
 
     // 最小形态：方法参数即依赖，Spring 按类型自动注入
-    @Bean
+    @[Bean](/glossary#bean)
     public PaymentClient paymentClient(OrderProperties properties) {
         return new PaymentClient(properties.gatewayUrl(), properties.backoff());
     }
@@ -278,7 +278,7 @@ dependencies {
 @Configuration(proxyBeanMethods = false)
 public class ExportConfiguration {
 
-    @Bean
+    @[Bean](/glossary#bean)
     @ConditionalOnProperty(name = "app.export.enabled",
                            havingValue = "true",
                            matchIfMissing = false) // 属性缺失时视为关闭
@@ -333,7 +333,7 @@ public class ReportFacade {
 
 把容器里的 Bean 分成两类看，就再也不迷惑了：
 
-- **你声明的**：`@Service`、`@Bean`、`@ConfigurationProperties` 注册的 Bean，全部以你的定义为准；
+- **你声明的**：`@Service`、`@[Bean](/glossary#bean)`、`@ConfigurationProperties` 注册的 Bean，全部以你的定义为准；
 - **自动配置给的**：starter 引入后按条件补齐的默认实现（DispatcherServlet、RestClient.Builder、任务执行器……）。
 
 两条判断依据覆盖全部行为：**classpath 上有什么依赖**决定自动配置尝试装配什么；**你自己有没有定义同类 Bean**决定它的兜底是否退位。所以"为什么我这个 Bean 没生效"的排查路径永远是：启动加 `--debug` 看条件评估报告 → 确认依赖是否在 → 确认自己的定义是否恰好排在了前面。干扰项用 `@SpringBootApplication(exclude = XxxAutoConfiguration.class)` 排除。

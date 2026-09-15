@@ -1,6 +1,6 @@
 ---
 title: "打包、镜像与部署"
-description: "从 fat jar 到分层 Dockerfile 与 Buildpacks 镜像，再到 JVM 容器参数、K8s 探针接入、发布回滚、优雅停机与 systemd 服务，把 Spring Boot 4.1.1 应用安全送上生产环境。"
+description: "从 [fat jar](/glossary#fat-jar-与-boot-inf) 到分层 Dockerfile 与 Buildpacks 镜像，再到 JVM 容器参数、K8s 探针接入、发布回滚、优雅停机与 systemd 服务，把 Spring Boot 4.1.1 应用安全送上生产环境。"
 official: "https://docs.spring.io/spring-boot/4.1.1/reference/packaging/container-images/dockerfiles.html"
 ---
 
@@ -16,7 +16,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/reference/packaging/containe
 
 上一章：[可观测性与 Actuator 生产参数](/advanced/observability)——本页的探针与健康检查依赖其中接入的 Actuator。
 
-> **上一章**：[可观测性与 Actuator 生产参数](/advanced/observability) · **下一章**：[注解、Starter 与配置项速查](/reference/api)
+> **上一章**：[可观测性与 Actuator 生产参数](/advanced/observability) · **下一章**：[注解、[Starter](/glossary#starter) 与配置项速查](/reference/api)
 
 ## 业务场景
 

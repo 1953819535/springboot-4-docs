@@ -1,12 +1,12 @@
 ---
 title: "数据访问实践"
-description: "Spring Boot 4.1.1 数据访问深扩：JdbcClient 全 API 增删改查与 record 映射、JPA 企业形态（审计/Pageable/EntityGraph/投影）、事务属性与失效五坑、多数据源骨架与 Flyway 规范。"
+description: "Spring Boot 4.1.1 数据访问深扩：JdbcClient 全 API 增删改查与 record 映射、JPA 企业形态（审计/Pageable/EntityGraph/投影）、事务属性与失效五坑、多数据源骨架与 [Flyway](/glossary#flyway-与数据库迁移) 规范。"
 official: "https://docs.spring.io/spring-boot/4.1.1/reference/data/sql.html"
 ---
 
 > **本章你会学到**
 > - JdbcClient 的完整 API 面：query / update / param / record 映射 / 分页，一套流式链路写完增删改查
-> - JPA 的企业形态：审计字段、Pageable 分页、`@EntityGraph` 根治 N+1、`@Query`+`@Modifying`、interface 与 record 两种投影
+> - JPA 的企业形态：审计字段、Pageable 分页、`@EntityGraph` 根治 [N+1](/glossary#n1-查询)、`@Query`+`@Modifying`、interface 与 record 两种投影
 > - 事务传播属性选型表（REQUIRED / REQUIRES_NEW / NESTED）与事务失效五坑（每个带最小反例）
 > - 两个数据源 + 两个事务管理器的配置类骨架（含 Boot 4 的 `defaultCandidate=false` 关键写法）
 > - Flyway 版本化迁移规范与生产配置，外加 7 条数据层避坑
@@ -16,7 +16,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/reference/data/sql.html"
 ## 业务场景
 
 ::: tip 术语速览
-**ORM**：对象↔数据库表的映射，操作对象即操作数据（Hibernate 是实现，JPA 是标准接口）。**懒加载**：关联数据第一次访问才发 SQL——省资源，但可能引发 **N+1**（查 1 次列表 + 每行各查 1 次关联 = 1+N 条 SQL）。**DTO**：层间搬运数据的 record 对象，不把数据库 Entity 直接暴露给接口。更多见 [核心概念速查](/glossary)。
+**ORM**：对象↔数据库表的映射，操作对象即操作数据（Hibernate 是实现，JPA 是标准接口）。**[懒加载](/glossary#懒加载lazy-loading)**：关联数据第一次访问才发 SQL——省资源，但可能引发 **N+1**（查 1 次列表 + 每行各查 1 次关联 = 1+N 条 SQL）。**[DTO](/glossary#dto)**：层间搬运数据的 record 对象，不把数据库 Entity 直接暴露给接口。更多见 [核心概念速查](/glossary)。
 :::
 
 
@@ -26,7 +26,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/reference/data/sql.html"
 - 订单/客户主数据要经得起多人维护——需要 JPA 的变更跟踪、审计字段和仓储抽象；
 - 对账逻辑必须"要么全成、要么全不加"——需要可控的事务边界；此外还要从老库抽数，天然出现**多数据源**。
 
-Spring Boot 的选型答案：**简单直查用 `JdbcClient`（Framework 6.1+ 引入，Boot 自动配置），复杂领域模型用 Spring Data JPA，两者共存于同一个连接池之上并不冲突。** 连接池默认 HikariCP——语料口径："We prefer HikariCP for its performance and concurrency. If HikariCP is available, we always choose it."
+Spring Boot 的选型答案：**简单直查用 `JdbcClient`（Framework 6.1+ 引入，Boot [自动配置](/glossary#自动配置auto-configuration)），复杂领域模型用 Spring Data JPA，两者共存于同一个连接池之上并不冲突。** 连接池默认 [HikariCP](/glossary#连接池hikaricp)——语料口径："We prefer HikariCP for its performance and concurrency. If HikariCP is available, we always choose it."
 
 ### 极简选型表
 
@@ -75,7 +75,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-data-jpa</artifactId>
-    <!-- 传递引入 spring-jdbc 与 HikariCP：JdbcClient 也能直接用 -->
+    <!-- 传递引入 spring-jdbc 与 [HikariCP](/glossary#连接池hikaricp)：JdbcClient 也能直接用 -->
 </dependency>
 <dependency>
     <groupId>com.h2database</groupId>
@@ -245,7 +245,7 @@ public class Order {
 @Configuration
 @EnableJpaAuditing
 public class JpaAuditingConfig {
-    @Bean
+    @[Bean](/glossary#bean)
     public AuditorAware<String> auditor() {
         return () -> Optional.of("system"); // 生产中从登录态取当前用户
     }
@@ -276,7 +276,7 @@ Page<Order> page = repository.findByCustomerId(42L,
 ```java
 public interface OrderRepository extends Repository<Order, Long> {
 
-    // 不加 EntityGraph：1 条查订单 + N 条查明细 = N+1
+    // 不加 EntityGraph：1 条查订单 + N 条查明细 = [N+1](/glossary#n1-查询)
     @EntityGraph(attributePaths = {"items"})   // 一次 left join 带回明细
     Page<Order> findByCustomerId(Long customerId, Pageable pageable);
 }
@@ -344,7 +344,7 @@ public class OrderService {
     }
     @Transactional
     public void audit() { ... }
-    // ✅ 解法：注入自身代理 self.audit()；或把 audit() 挪到另一个 Bean
+    // ✅ 解法：注入自身代理 self.audit()；或把 audit() 挪到另一个 [Bean](/glossary#bean)
 }
 
 // 坑2：方法不是 public——代理不为非 public 方法织入事务
@@ -382,7 +382,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.[Bean](/glossary#bean);
 import org.springframework.context.annotation.Configuration;
 
 @Configuration(proxyBeanMethods = false)
@@ -418,7 +418,7 @@ JPA 多库还需各配一套 EntityManagerFactory + 事务管理器，仓储用 
 public class SecondJpaConfiguration {
 
     @Qualifier("second")
-    @Bean(defaultCandidate = false)
+    @[Bean](/glossary#bean)(defaultCandidate = false)
     public LocalContainerEntityManagerFactoryBean secondEntityManagerFactory(
             @Qualifier("second") DataSource dataSource, @Qualifier("second") JpaProperties jpaProperties) {
         EntityManagerFactoryBuilder builder =
@@ -433,7 +433,7 @@ public class SecondJpaConfiguration {
         return new JpaTransactionManager(emf);
     }
 }
-// 主库同理：@EnableJpaRepositories 指向 entityManagerFactory/transactionManager 自动配置 Bean
+// 主库同理：@EnableJpaRepositories 指向 entityManagerFactory/transactionManager [自动配置](/glossary#自动配置auto-configuration) Bean
 ```
 
 要点三条：① 额外 Bean 一律 `defaultCandidate = false` + `@Qualifier`；② 事务管理器与 EntityManagerFactory 一一对应，`@Transactional` 跨不了两个库——真要跨库一致，需上 JTA（语料口径）；③ 仓储按实体包严格分家，防止扫描错库。
@@ -444,7 +444,7 @@ public class SecondJpaConfiguration {
 
 ```properties
 spring.jpa.hibernate.ddl-auto=validate   # 校验映射与表结构一致
-spring.jpa.open-in-view=false            # 关闭 OSIV：视图层惰性加载是 N+1 隐患
+spring.jpa.open-in-view=false            # 关闭 OSIV：视图层惰性加载是 [N+1](/glossary#n1-查询) 隐患
 ```
 
 迁移脚本放 `src/main/resources/db/migration`，命名规则 `V<版本>__<描述>.sql`（双下划线）：
@@ -512,4 +512,4 @@ create table orders (
 
 - 官方镜像：`spring-boot-4.1.1-docs/reference/data/sql.md`（JdbcClient / JPA / 连接池）、`how-to/data-access.md`（自定义与多数据源、Multiple EntityManagerFactories）、`appendix/application-properties/index.md`（spring.datasource.hikari.* / spring.jpa.* / spring.flyway.*）
 - 官方在线：[SQL Databases](https://docs.spring.io/spring-boot/4.1.1/reference/data/sql.html) · [How-to: Data Access](https://docs.spring.io/spring-boot/4.1.1/how-to/data-access.html)
-- 站内：[虚拟线程深度实践](/practice/virtual-threads)（连接池并发匹配）· [消息：Kafka、AMQP 与 JMS](/practice/messaging)（上一章）· [缓存：Caffeine 与 Redis](/practice/caching)（下一章）
+- 站内：[[虚拟线程](/glossary#虚拟线程-vs-平台线程)深度实践](/practice/virtual-threads)（连接池并发匹配）· [消息：Kafka、AMQP 与 JMS](/practice/messaging)（上一章）· [缓存：Caffeine 与 Redis](/practice/caching)（下一章）

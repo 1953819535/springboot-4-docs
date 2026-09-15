@@ -1,5 +1,5 @@
 ---
-title: "注解、Starter 与配置项速查"
+title: "注解、[Starter](/glossary#starter) 与配置项速查"
 description: "Spring Boot 4.1.1 常用注解、现行 Starter 名称与高频配置项速查表（约 40 键，含官方默认值），按场景分组即查即用。"
 official: "https://docs.spring.io/spring-boot/4.1.1/appendix/application-properties/index.html"
 ---
@@ -9,7 +9,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/appendix/application-propert
 ## 本章你会学到
 
 - 按场景快速定位功能对应的 starter：Web、数据、消息、安全、观测一张表看完；
-- 按分层速查常用注解：Web、配置装配、数据事务、校验、缓存 AOP、消息异步、安全测试；
+- 按分层速查常用注解：Web、配置装配、数据事务、校验、缓存 [AOP](/glossary#aop-与切面)、消息异步、安全测试；
 - 拿到一份带官方默认值的高频配置项表（约 40 键），改配置前先查这里。
 
 > **下一章**：[废弃项清理与变更对照清单](/reference/cleanup)
@@ -30,12 +30,12 @@ official: "https://docs.spring.io/spring-boot/4.1.1/appendix/application-propert
 | --- | --- |
 | `spring-boot-starter-webmvc` | Spring MVC REST/页面服务（旧名对照见 [废弃项清理清单](/reference/cleanup)） |
 | `spring-boot-starter-webflux` | 响应式 Web（Reactor Netty） |
-| `spring-boot-starter-validation` | Bean Validation（Jakarta Validation） |
-| `spring-boot-starter-data-jpa` | JPA 数据访问（HikariCP + Hibernate） |
+| `spring-boot-starter-validation` | [Bean](/glossary#bean) Validation（Jakarta Validation） |
+| `spring-boot-starter-data-jpa` | JPA 数据访问（[HikariCP](/glossary#连接池hikaricp) + Hibernate） |
 | `spring-boot-starter-jdbc` | JDBC 数据访问 |
 | `spring-boot-starter-data-redis` | Redis 访问（Lettuce） |
 | `spring-boot-starter-security` | 安全与鉴权 |
-| `spring-boot-starter-oauth2-resource-server` | OAuth2 资源服务器（JWT 校验） |
+| `spring-boot-starter-oauth2-resource-server` | OAuth2 资源服务器（[JWT](/glossary#jwt--csrf--cors-速记) 校验） |
 | `spring-boot-starter-actuator` | 生产监控与管理端点 |
 | `spring-boot-starter-micrometer-metrics` | Micrometer 指标门面（可独立于 actuator 使用） |
 | `spring-boot-starter-aspectj` | AOP 切面（旧名对照见 [废弃项清理清单](/reference/cleanup)） |
@@ -46,7 +46,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/appendix/application-propert
 | `spring-boot-starter-restclient` | 声明式 HTTP 客户端（RestClient / `@HttpExchange`） |
 | `spring-boot-starter-opentelemetry` | OpenTelemetry + OTLP 链路追踪 |
 | `spring-boot-starter-zipkin` | Brave + Zipkin 链路追踪 |
-| `spring-boot-starter-test` | 测试：JUnit 5、Mockito、MockMvc、AssertJ |
+| `spring-boot-starter-test` | 测试：JUnit 5、[Mockito](/glossary#mock)、MockMvc、AssertJ |
 
 ::: tip 命名规律与测试配套
 4.x 给每个 starter 提供成对的 `-test` 变体（如 `starter-webmvc-test`）；日常全栈测试从 `starter-test` 起步即可，全套清单见官方镜像 `appendix/dependency-versions/coordinates.md`。
@@ -79,9 +79,9 @@ java -jar target/app.jar  # 运行产物
 
 | 注解 | 作用 | 常见位置 |
 | --- | --- | --- |
-| `@SpringBootApplication` | 启动类：自动配置 + 组件扫描 + 配置类 | 主类 |
+| `@SpringBootApplication` | 启动类：[自动配置](/glossary#自动配置auto-configuration) + 组件扫描 + 配置类 | 主类 |
 | `@Configuration` + `@Bean` | 自定义装配 | 配置类 / 方法 |
-| `@Component` / `@Service` / `@Repository` / `@Controller` | Bean 注册（语义分层） | 类 |
+| `@Component` / `@Service` / `@Repository` / `@Controller` | [Bean](/glossary#bean) 注册（语义分层） | 类 |
 | `@ConfigurationProperties` | 类型安全配置绑定（配合 record） | 配置类 |
 | `@Value("${key:default}")` | 单项配置读取（自带默认值更稳） | 字段 / 参数 |
 | `@Profile("prod")` | 按 profile 条件装配 | 类 / 方法 |
@@ -100,7 +100,7 @@ java -jar target/app.jar  # 运行产物
 | 注解 | 作用 | 常见位置 |
 | --- | --- | --- |
 | `@Valid` / `@Validated` | 触发级联校验 / 触发分组校验 | 参数 / 类 |
-| `@NotNull` / `@NotBlank` / `@NotEmpty` | 非空约束（细分 null/空白/集合空） | DTO 字段 |
+| `@NotNull` / `@NotBlank` / `@NotEmpty` | 非空约束（细分 null/空白/集合空） | [DTO](/glossary#dto) 字段 |
 | `@Size` / `@Min` / `@Max` / `@Pattern` / `@Email` / `@Past` | 长度、数值范围、正则与语义约束 | DTO 字段 |
 
 #### JSON 与缓存 AOP
@@ -154,7 +154,7 @@ java -jar target/app.jar  # 运行产物
 | `server.forward-headers-strategy` | —（受支持云平台 `native`，其余 `none`） | 反代后取真实 IP/协议 |
 | `server.max-http-request-header-size` | `8KB` | 请求头大小上限 |
 | `server.compression.enabled` | `false` | 响应压缩 |
-| `server.tomcat.threads.max` | `200` | Tomcat 最大工作线程（开虚拟线程后不生效） |
+| `server.tomcat.threads.max` | `200` | Tomcat 最大工作线程（开[虚拟线程](/glossary#虚拟线程-vs-平台线程)后不生效） |
 | `server.tomcat.basedir` | —（临时目录） | Tomcat 工作目录 |
 
 #### 数据源与 JPA
@@ -163,12 +163,12 @@ java -jar target/app.jar  # 运行产物
 | --- | --- | --- |
 | `spring.datasource.url` | — | JDBC 连接串（驱动按 URL 自动探测） |
 | `spring.datasource.username` / `spring.datasource.password` | — | 数据库凭据（密码走环境变量） |
-| `spring.datasource.hikari.maximum-pool-size` | —（※，Hikari 默认 10） | HikariCP 连接池上限 |
+| `spring.datasource.hikari.maximum-pool-size` | —（※，Hikari 默认 10） | [HikariCP](/glossary#连接池hikaricp) 连接池上限 |
 | `spring.datasource.hikari.leak-detection-threshold` | —（※，0 即关闭） | 连接泄漏检测阈值 |
 | `spring.jpa.hibernate.ddl-auto` | 内嵌库 `create-drop`，否则 `none` | 生产固定 `validate` 或 `none`，结构交给迁移工具 |
 | `spring.jpa.show-sql` | `false` | 打印 SQL（仅开发环境） |
 | `spring.jpa.open-in-view` | `true` | OSIV；生产建议显式关闭 |
-| `spring.flyway.enabled` | `true` | Flyway 迁移（类路径有 Flyway 时生效） |
+| `spring.flyway.enabled` | `true` | [Flyway](/glossary#flyway-与数据库迁移) 迁移（类路径有 Flyway 时生效） |
 | `spring.liquibase.enabled` | `true` | Liquibase 迁移 |
 
 #### Actuator 与可观测性
@@ -194,7 +194,7 @@ java -jar target/app.jar  # 运行产物
 | `spring.application.name` | — | 应用名（日志、监控、注册中心通用） |
 | `spring.threads.virtual.enabled` | `false` | 虚拟线程开关（JDK 25 下推荐开启，详见虚拟线程章节） |
 | `spring.main.allow-circular-references` | `false` | 是否允许循环依赖（4.x 默认拒绝） |
-| `spring.main.lazy-initialization` | `false` | 全局懒加载 |
+| `spring.main.lazy-initialization` | `false` | 全局[懒加载](/glossary#懒加载lazy-loading) |
 | `spring.profiles.active` | — | 激活的 profile |
 | `spring.task.execution.pool.core-size` | `8` | 普通线程池核心数（开虚拟线程后不生效） |
 | `spring.autoconfigure.exclude` | — | 排除指定自动配置类 |

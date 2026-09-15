@@ -12,7 +12,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/tutorial/first-application/i
 
 
 ::: tip 术语速览 · 先懂三个词
-**Bean**：交给 Spring 容器管理的对象（你声明要什么，容器负责造好递来）。**IoC/依赖注入（DI）**：创建对象的控制权交给容器，依赖作为构造器参数注入，不再自己 new。**Starter**：一组功能全家桶依赖坐标，引一个 = 声明我要做这类事。更多概念随时查 [核心概念速查](/glossary)。
+**[Bean](/glossary#bean)**：交给 Spring 容器管理的对象（你声明要什么，容器负责造好递来）。**IoC/依赖注入（DI）**：创建对象的控制权交给容器，依赖作为构造器参数注入，不再自己 new。**[Starter](/glossary#starter)**：一组功能全家桶依赖坐标，引一个 = 声明我要做这类事。更多概念随时查 [核心概念速查](/glossary)。
 :::
 
 ## 业务场景
@@ -40,7 +40,7 @@ gradle --version  # 期望 8.14+ 或 9.x
 | 内嵌 Servlet 容器 | Tomcat 11.0.x / Jetty 12.1.x（Servlet 6.1） |
 
 ::: tip 为什么推荐 JDK 25
-17 只是准入门槛。虚拟线程、record 模式匹配、未命名变量 `_` 等现代语法的完整收益要在 21+ 才能拿到，25 是当前推荐的生产 LTS；GraalVM 原生镜像同样要求 GraalVM 25+。
+17 只是准入门槛。[虚拟线程](/glossary#虚拟线程-vs-平台线程)、record 模式匹配、未命名变量 `_` 等现代语法的完整收益要在 21+ 才能拿到，25 是当前推荐的生产 LTS；GraalVM 原生镜像同样要求 GraalVM 25+。
 :::
 
 ### 2. 生成项目
@@ -327,4 +327,4 @@ java -jar build/libs/demo-0.0.1-SNAPSHOT.jar
 
 官网对应页：<https://docs.spring.io/spring-boot/4.1.1/tutorial/first-application/index.html>
 
-站内相关页：[IoC 与依赖注入](/guide/ioc-di) · [外化配置与多环境](/guide/configuration) · [REST API 开发全规范](/guide/rest-api)
+站内相关页：[[IoC](/glossary#ioc-容器与-ioc-容器) 与依赖注入](/guide/ioc-di) · [外化配置与多环境](/guide/configuration) · [REST API 开发全规范](/guide/rest-api)

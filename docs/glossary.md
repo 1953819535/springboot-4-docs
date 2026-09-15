@@ -9,6 +9,8 @@ description: "Bean、IoC、依赖注入、自动配置、API 版本化、DTO、A
 
 ## 容器与对象管理
 
+<a id="bean"></a>
+
 ### Bean
 
 **Bean 是什么**：由 Spring 容器创建、装配和管理的对象，就叫 Bean。你在类上标 `@Service`、`@Component`，或在 `@Configuration` 类里写 `@Bean` 方法，Spring 就会接管这个类的"生老病死"——你不再自己 `new`，而是声明"我需要它"，Spring 负责造好递给你。
@@ -19,11 +21,15 @@ description: "Bean、IoC、依赖注入、自动配置、API 版本化、DTO、A
 
 **为什么重要**：测试时可以换掉任何一个 Bean（给假数据）、配置变更时不用改代码——这一切都建立在"对象由容器统一供给"之上。
 
+<a id="ioc-容器与-ioc-容器"></a>
+
 ### IoC（控制反转）与 IoC 容器
 
 **IoC 是什么**：Inversion of Control，控制反转。传统写法里你的代码自己 `new` 依赖；控制反转之后，**创建对象的控制权反转给了容器**——你只声明依赖，容器在运行时把现成的对象"注入"进来。
 
 **IoC 容器**就是干这件事的运行时引擎（底层是 `ApplicationContext`）。说"Spring 容器"、"IoC 容器"、"ApplicationContext"，指的都是同一个东西。
+
+<a id="依赖注入di"></a>
 
 ### 依赖注入（DI）
 
@@ -47,15 +53,21 @@ public class UserService {
 
 **为什么重要**：换数据库实现、换 Mock 测试、多环境配置——都只改容器装配，不动业务代码。
 
+<a id="自动配置auto-configuration"></a>
+
 ### 自动配置（Auto-configuration）
 
 **自动配置是什么**：Spring Boot 检测你 classpath 上有什么依赖，就自动帮你创建好那一整套 Bean。引入 `starter-data-jpa`，数据源、事务管理器、JPA 工厂全自动装配——这就是"约定大于配置"的落点。
 
 **排障手段**：怀疑某个自动配置没生效，用 `--debug` 启动看条件评估报告。
 
+<a id="starter"></a>
+
 ### Starter
 
 **Starter 是什么**：一组"功能全家桶"依赖坐标。`spring-boot-starter-webmvc` 一个坐标带入 Web 开发所需的全部依赖与默认配置。引入 starter = 声明"我要做这类事情"。
+
+<a id="applicationcontext"></a>
 
 ### ApplicationContext
 
@@ -70,6 +82,8 @@ public class UserService {
 ### API 版本化
 
 **API 版本化是什么**：接口发生不兼容变更时，新旧两版并行服务不同客户端的机制。Spring Framework 7 内置支持：同一个 `/api/users` 路径按版本（请求头/媒体类型等）路由到不同方法，详见 [内置 API 版本控制](/guide/api-versioning)。
+
+<a id="dto"></a>
 
 ### DTO
 
@@ -91,9 +105,13 @@ Entity 含数据库内部字段（创建时间、软删标记），直接返回�
 
 **ORM 是什么**：Object-Relational Mapping，对象关系映射——把 Java 类映射到数据库表、对象属性映射到列，让你操作对象而不是拼 SQL。Hibernate 是最主流的 ORM 实现（JPA 是其标准接口）。
 
+<a id="懒加载lazy-loading"></a>
+
 ### 懒加载（Lazy Loading）
 
 **懒加载是什么**：查询主对象时不立刻加载其关联数据，等第一次访问关联字段才发 SQL。省资源，但用不好会触发 N+1（见下）。
+
+<a id="n1-查询"></a>
 
 ### N+1 查询
 
@@ -107,19 +125,27 @@ Entity 含数据库内部字段（创建时间、软删标记），直接返回�
 
 **连接池是什么**：数据库连接的创建成本极高（TCP 握手+认证），池子预先建好一批连接反复借还。HikariCP 是 Spring Boot 默认的连接池实现。
 
+<a id="flyway-与数据库迁移"></a>
+
 ### Flyway 与数据库迁移
 
 **迁移是什么**：把每次表结构变更写成带版本号的 SQL 脚本（V1、V2…），工具按序执行并记录——表结构也进版本控制。Flyway 是 Spring Boot 集成的迁移工具。
 
 ## 测试概念
 
+<a id="mock"></a>
+
 ### Mock
 
 **Mock 是什么**：测试时用一个"假的"替换真实依赖，预设它的返回值——隔离被测代码，不真的调数据库/远端。`@MockitoBean` 声明的就是 Mock Bean。
 
+<a id="切片测试test-slice"></a>
+
 ### 切片测试（Test Slice）
 
 **切片测试是什么**：只加载"某一层"的 Bean 来测试——@WebMvcTest 只装 Web 层、@DataJpaTest 只装数据层。启动快、隔离准，代价是其他层都是 Mock。详见 [测试策略](/advanced/testing)。
+
+<a id="testcontainers"></a>
 
 ### Testcontainers
 
@@ -130,6 +156,8 @@ Entity 含数据库内部字段（创建时间、软删标记），直接返回�
 ### 镜像 / 镜像层 / Buildpacks
 
 **容器镜像**：把应用+运行时打包成"到处能跑"的模板。**镜像层**：镜像由多层只读层叠成，依赖层不变就不重建——分层构建加速 CI。**Buildpacks**：不用写 Dockerfile，工具链扫描你的 jar 自动生成合规镜像（`bootBuildImage`）。
+
+<a id="fat-jar-与-boot-inf"></a>
 
 ### fat jar 与 BOOT-INF
 
@@ -144,6 +172,8 @@ Entity 含数据库内部字段（创建时间、软删标记），直接返回�
 **指标（Metric）**：数值型运行数据（QPS、耗时、内存）。**标签（Tag）**：指标的维度键值对（如 `uri=/users`）。纪律：标签取值必须是有限集合（低基数），放用户 ID 这种无限值会撑爆时序库。
 
 ## 并发概念
+
+<a id="虚拟线程-vs-平台线程"></a>
 
 ### 虚拟线程 vs 平台线程
 
@@ -161,6 +191,8 @@ Entity 含数据库内部字段（创建时间、软删标记），直接返回�
 
 **穿透**：查询根本不存在的数据，缓存永远不命中，全打到数据库——用空值缓存/参数校验挡。**雪崩**：大量缓存同一时刻过期，数据库瞬间过载——TTL 加随机抖动。**击穿**：某个热点 key 过期瞬间并发全打到库——加锁或逻辑过期。
 
+<a id="aop-与切面"></a>
+
 ### AOP 与切面
 
 **AOP 是什么**：Aspect-Oriented Programming，面向切面编程——把"横切多个业务的通用逻辑"（日志、计时、鉴权）从业务代码里抽出来，声明"在哪些方法前后执行"。`@Cacheable`、`@Transactional` 的实现都基于 AOP 动态代理。
@@ -172,6 +204,8 @@ Entity 含数据库内部字段（创建时间、软删标记），直接返回�
 ### MDC 与链路追踪
 
 **MDC**：Mapped Diagnostic Context——在日志里附加请求级上下文（如 requestId），一次写入全链路日志可见。**链路追踪（Tracing）**：跨服务跟踪一次请求的完整路径（Micrometer Tracing/OTel）。
+
+<a id="jwt--csrf--cors-速记"></a>
 
 ### JWT / CSRF / CORS 速记
 

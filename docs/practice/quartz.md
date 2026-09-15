@@ -6,7 +6,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/reference/io/quartz.html"
 
 # 任务调度：Quartz
 
-> 本章你会学到：把调度从"进程内存"升级到"数据库持久化"，多实例部署下 cron 任务不重跑，以及 Job 里怎么注入 Spring Bean。上一章：[批处理：Spring Batch](/practice/batch)。
+> 本章你会学到：把调度从"进程内存"升级到"数据库持久化"，多实例部署下 cron 任务不重跑，以及 Job 里怎么注入 Spring [Bean](/glossary#bean)。上一章：[批处理：Spring Batch](/practice/batch)。
 
 > **上一章**：[批处理：Spring Batch](/practice/batch) · **下一章**：[安全与鉴权](/advanced/security)
 ## 业务场景
@@ -59,7 +59,7 @@ Job 本体继承 `QuartzJobBean`——普通 Spring Bean 与 JobDataMap 属性�
 ```java
 public class ReportJob extends org.springframework.scheduling.quartz.QuartzJobBean {
 
-    private ReportService reportService;   // Spring Bean：setter 注入
+    private ReportService reportService;   // Spring [Bean](/glossary#bean)：setter 注入
     private String target;                 // JobDataMap 属性：同名 setter 注入
 
     public void setReportService(ReportService reportService) {
@@ -82,7 +82,7 @@ JobDetail 与 Trigger 声明为 Bean 后**自动被调度器拾取**，无需手
 @Configuration
 public class QuartzConfig {
 
-    @Bean
+    @[Bean](/glossary#bean)
     public org.quartz.JobDetail reportJobDetail() {
         return org.quartz.JobBuilder.newJob(ReportJob.class)
                 .withIdentity("reportJob")

@@ -1,6 +1,6 @@
 ---
 title: "HTTP 客户端三件套：RestClient 与声明式 @HttpExchange"
-description: "RestClient 同步调用、全动词与错误处理分层、企业级统一封装、@HttpExchange 声明式客户端与分组配置、超时三层概念与切片测试。"
+description: "RestClient 同步调用、全动词与错误处理分层、企业级统一封装、@HttpExchange 声明式客户端与分组配置、超时三层概念与[切片测试](/glossary#切片测试test-slice)。"
 official: "https://docs.spring.io/spring-boot/4.1.1/reference/io/rest-client.html"
 ---
 
@@ -14,7 +14,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/reference/io/rest-client.htm
 > - 用 `@HttpExchange` 接口 + 逻辑组（group）构建可测试的声明式客户端
 > - 超时的三层概念（连接/读/全局兜底），以及每一层在哪配
 >
-> 上一章：[虚拟线程深度实践](/practice/virtual-threads) ｜ 下一章：[内置 API 版本控制](/guide/api-versioning)
+> 上一章：[[虚拟线程](/glossary#虚拟线程-vs-平台线程)深度实践](/practice/virtual-threads) ｜ 下一章：[内置 API 版本控制](/guide/api-versioning)
 
 ## 业务场景
 
@@ -23,7 +23,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/reference/io/rest-client.htm
 | 诉求 | 选型 | 一句话理由 |
 | --- | --- | --- |
 | 同步调一下外部 REST，要快写完 | **RestClient** | 函数式流式 API，官方明确推荐（非响应式栈首选） |
-| 多个团队共用一套远端 API，要类型安全、可测试 | **@HttpExchange 接口客户端** | 接口即契约，实现由框架生成，Mock 成本极低 |
+| 多个团队共用一套远端 API，要类型安全、可测试 | **@HttpExchange 接口客户端** | 接口即契约，实现由框架生成，[Mock](/glossary#mock) 成本极低 |
 | 流式响应、背压、网关聚合 | **WebClient** | 响应式栈（WebFlux/Reactor）专属 |
 
 ::: tip 一句话记忆
@@ -34,7 +34,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/reference/io/rest-client.htm
 
 ### RestClient：注入 Builder，三行核心调用
 
-Spring Boot 自动提供预配置的 `RestClient.Builder` 原型 Bean（已装配消息转换器与请求工厂），注入后建实例：
+Spring Boot 自动提供预配置的 `RestClient.Builder` 原型 [Bean](/glossary#bean)（已装配消息转换器与请求工厂），注入后建实例：
 
 ```java
 @Service
@@ -146,7 +146,7 @@ spring:
         base-url: "https://api.user.example"
 ```
 
-注入接口即用——框架在启动时生成实现并注册为 Bean：
+注入接口即用——框架在启动时生成实现并注册为 [Bean](/glossary#bean)：
 
 ```java
 @RestController
@@ -194,7 +194,7 @@ public class MyApplication { /* … */ }
 用 `@RestClientTest` 只装配被测客户端与 Mock 服务器，不启动完整应用。`MockRestServiceServer` 按 URL 与响应内容模拟远端：
 
 ```java
-@RestClientTest(WeatherService.class)               // 只装配被测 Bean
+@RestClientTest(WeatherService.class)               // 只装配被测 [Bean](/glossary#bean)
 class WeatherServiceTests {
 
     @Autowired
@@ -239,7 +239,7 @@ class WeatherServiceTests {
 @Configuration(proxyBeanMethods = false)
 public class RestClientConfig {
 
-    @Bean
+    @[Bean](/glossary#bean)
     RestClient weatherRestClient(RestClient.Builder builder) {
         return builder
                 .baseUrl("https://api.weather.example")
@@ -335,5 +335,5 @@ spring:
 - 官方镜像：`spring-boot-4.1.1-docs/reference/io/rest-client.md`——RestClient 定制/SSL、HTTP Service Interface Clients、Importing HTTP Services、Service Client Groups、全局配置与 SSRF 过滤
 - 官方镜像：`spring-boot-4.1.1-docs/reference/testing/spring-boot-applications.md`——`@RestClientTest` 切片与 `MockRestServiceServer` 完整规则
 - 官方镜像：`spring-boot-4.1.1-docs/appendix/application-properties/index.md`——`spring.http.clients.*` / `spring.http.serviceclient.*` 属性全集
-- 站内：[内置 API 版本控制](/guide/api-versioning)（客户端携带版本）｜ [可观测性与 Actuator](/advanced/observability)（客户端指标）｜ [测试策略与 Testcontainers](/advanced/testing)
+- 站内：[内置 API 版本控制](/guide/api-versioning)（客户端携带版本）｜ [可观测性与 Actuator](/advanced/observability)（客户端指标）｜ [测试策略与 [Testcontainers](/glossary#testcontainers)](/advanced/testing)
 - 重试：Spring Retry 官方文档 <https://spring.io/projects/spring-retry>（Boot 不默认集成，需自行引入）

@@ -1,12 +1,12 @@
 ---
 title: 安全（Security）
-description: Spring Boot 4.1.1 安全实战：默认安全行为、SecurityFilterChain 授权规则、OAuth2 Resource Server JWT 主路线、自有用户表登录与自签 JWT、CORS、方法级授权与安全测试。
+description: Spring Boot 4.1.1 安全实战：默认安全行为、SecurityFilterChain 授权规则、OAuth2 Resource Server [JWT](/glossary#jwt--csrf--cors-速记) 主路线、自有用户表登录与自签 JWT、CORS、方法级授权与安全测试。
 official: https://docs.spring.io/spring-boot/4.1.1/reference/web/spring-security.html
 ---
 
 > **本章你会学到**：引入 starter 后 Spring Boot 默认提供了哪些防护；如何用 `SecurityFilterChain` + lambda DSL 重写授权规则；JWT 资源服务器的三个关键属性（`issuer-uri` / `jwk-set-uri` / `audiences`）与角色映射；没有外部 IdP 时，如何用自有用户表 + 自签 JWT 完成登录闭环；CORS 与 CSRF 各管什么；以及怎么给安全规则本身写测试。
 
-> **下一章**：[测试策略与 Testcontainers](/advanced/testing)
+> **下一章**：[测试策略与 [Testcontainers](/glossary#testcontainers)](/advanced/testing)
 ## 业务场景
 
 团队做的是前后端分离的订单系统，前端独立部署，API 需要对接公司统一身份平台（IdP），由 IdP 签发 JWT，后端只做校验——这是典型的**资源服务器**路线，也是本章的主线。
@@ -66,9 +66,13 @@ public class MinimalSecurityConfig {
 }
 ```
 
-一旦定义了 `SecurityFilterChain` Bean，默认的整条安全链（含 actuator 的保护策略）就由你接管。`httpBasic(withDefaults())`/`formLogin(withDefaults())` 按需选择。
+一旦定义了 `SecurityFilterChain` [Bean](/glossary#bean)，默认的整条安全链（含 actuator 的保护策略）就由你接管。`httpBasic(withDefaults())`/`formLogin(withDefaults())` 按需选择。
 
 ## 关键注解与配置
+
+下图是无状态 JWT 认证的完整时序——验签全部在本地完成，授权服务器只在启动时被"发现"一次：
+
+![下图是无状态 JWT 认证的完整时序——验签全部在本地完成，授权服务器只在启动时被"发现"一次](/diagrams/jwt-auth-flow.svg)
 
 | 注解 / 属性 | 作用 |
 | --- | --- |
@@ -77,7 +81,7 @@ public class MinimalSecurityConfig {
 | `spring.security.user.name` / `spring.security.user.password` | 覆盖默认内存用户的账号密码 |
 | `spring.security.oauth2.resourceserver.jwt.issuer-uri` | OIDC Issuer 标识，自动发现 JWKS 并校验 |
 | `spring.security.oauth2.resourceserver.jwt.jwk-set-uri` | 直接指定 JWK Set 地址（IdP 不支持发现端点时） |
-| `spring.security.oauth2.resourceserver.jwt.audiences[0]` | 要求 JWT 的 `aud` claim 匹配指定值 |
+| `spring.security.oauth2.resourceserver.jwt.audiences[0]` | 要求 [JWT](/glossary#jwt--csrf--cors-速记) 的 `aud` claim 匹配指定值 |
 | `spring.security.oauth2.resourceserver.jwt.public-key-location` | 指向 PEM 编码 x509 公钥文件（授权服务器无 JWKS 时） |
 | `spring.security.oauth2.resourceserver.opaquetoken.*` | 不透明 token 走内省（introspection-uri/client-id/client-secret） |
 
@@ -121,7 +125,7 @@ spring:
             - "my-api"                                      # 校验 aud，防止别系统 token 串用
 ```
 
-`EndpointRequest` 依据 `management.endpoints.web.base-path` 生成匹配器；`oauth2ResourceServer` 的 JWT 解码器由 Boot 根据上述属性自动装配。若 IdP 连 JWKS 都不提供，改用 `public-key-location` 指向 PEM 公钥文件即可。
+`EndpointRequest` 依据 `management.endpoints.web.base-path` 生成匹配器；`oauth2ResourceServer` 的 [JWT](/glossary#jwt--csrf--cors-速记) 解码器由 Boot 根据上述属性自动装配。若 IdP 连 JWKS 都不提供，改用 `public-key-location` 指向 PEM 公钥文件即可。
 
 ### 深入：角色映射 Converter（claim → ROLE）
 
@@ -264,10 +268,10 @@ public JwtDecoder jwtDecoderHS256(@Value("${jwt.secret}") String secret) {
 }
 ```
 
-两种算法取舍：HS256 简单但**签发方与校验方必须共享同一个秘密**，多服务架构里秘密扩散面大；RS256 私钥只在签发方手里，公钥可随 JWKS 公开分发，微服务/外部接入场景优先。Spring Security 自带的 `JwtEncoder`/`JwtDecoder` 覆盖两条路线，通常无需再引入第三方 JWT 库；若团队已选定 jjwt 或 java-jwt 之类自行编解码，依赖坐标属签发侧团队选型，本文不指定。
+两种算法取舍：HS256 简单但**签发方与校验方必须共享同一个秘密**，多服务架构里秘密扩散面大；RS256 私钥只在签发方手里，公钥可随 JWKS 公开分发，微服务/外部接入场景优先。Spring Security 自带的 `JwtEncoder`/`JwtDecoder` 覆盖两条路线，通常无需再引入第三方 [JWT](/glossary#jwt--csrf--cors-速记) 库；若团队已选定 jjwt 或 java-jwt 之类自行编解码，依赖坐标属签发侧团队选型，本文不指定。
 
 ::: tip 密码哈希的默认行为
-`UserDetailsServiceAutoConfiguration` 装配的默认 `PasswordEncoder` 是 `PasswordEncoderFactories.createDelegatingPasswordEncoder()`：存储值带 `{bcrypt}`/`{noop}` 等 id 前缀，校验时按前缀分派、登录成功后自动把旧格式升级重存。自己在 `AuthConfig` 里显式声明 `PasswordEncoder` Bean 时，行为以你的实现为准——不指定 id 前缀的裸哈希将无法通过 `DelegatingPasswordEncoder` 校验。
+`UserDetailsServiceAutoConfiguration` 装配的默认 `PasswordEncoder` 是 `PasswordEncoderFactories.createDelegatingPasswordEncoder()`：存储值带 `{bcrypt}`/`{noop}` 等 id 前缀，校验时按前缀分派、登录成功后自动把旧格式升级重存。自己在 `AuthConfig` 里显式声明 `PasswordEncoder` [Bean](/glossary#bean) 时，行为以你的实现为准——不指定 id 前缀的裸哈希将无法通过 `DelegatingPasswordEncoder` 校验。
 :::
 
 ::: tip 认证事件日志
@@ -313,7 +317,7 @@ public class WebCorsConfig implements WebMvcConfigurer {
 }
 ```
 
-**取舍**：走 Spring Security（写法一）时预检请求同样要过安全链——如果安全链在 MVC 之前就拒绝了无 token 的 OPTIONS 预检，MVC 层的 CORS 配置（写法二）根本没机会生效。因此**前后端分离 + JWT** 场景选写法一（或写法三）让 CORS 在安全链内先处理；纯服务端渲染、无安全链拦截 OPTIONS 的简单应用，写法二就够。两者只选其一，叠加配置容易产生"预检通过但响应头重复"类怪象。
+**取舍**：走 Spring Security（写法一）时预检请求同样要过安全链——如果安全链在 MVC 之前就拒绝了无 token 的 OPTIONS 预检，MVC 层的 CORS 配置（写法二）根本没机会生效。因此**前后端分离 + [JWT](/glossary#jwt--csrf--cors-速记)** 场景选写法一（或写法三）让 CORS 在安全链内先处理；纯服务端渲染、无安全链拦截 OPTIONS 的简单应用，写法二就够。两者只选其一，叠加配置容易产生"预检通过但响应头重复"类怪象。
 
 ::: tip 预检请求也是请求
 `OPTIONS` 预检不会携带 `Authorization` 头。它在安全链里的放行由 `cors(withDefaults())` + `CorsConfigurationSource` 自动保证；自己写授权规则时，别把预检路径无意间挡在 `authenticated()` 之后。
@@ -394,7 +398,7 @@ class AdminControllerSecurityTests {
 }
 ```
 
-资源服务器（JWT）场景下，`SecurityMockMvcRequestPostProcessors.jwt()` 可以直接注入一个已验证的 `Jwt`，无需真实 IdP：
+资源服务器（[JWT](/glossary#jwt--csrf--cors-速记)）场景下，`SecurityMockMvcRequestPostProcessors.jwt()` 可以直接注入一个已验证的 `Jwt`，无需真实 IdP：
 
 ```java
 @WebMvcTest(AdminController.class)

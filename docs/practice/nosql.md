@@ -25,7 +25,7 @@ official: https://docs.spring.io/spring-boot/4.1.1/reference/data/nosql.html
 - 用户的好友推荐、社团关系需要**多跳查询**，关系型要写五六层自连接；
 - 海量写入的设备上报数据，需要**线性水平扩展**。
 
-这些问题催生了对 NoSQL 的选型需求。Spring Data 为多种 NoSQL 提供了统一编程模型，Spring Boot 又为其中大多数提供了自动配置——掌握"定位 + starter + 连接键"三要素，切换存储的心智成本极低。
+这些问题催生了对 NoSQL 的选型需求。Spring Data 为多种 NoSQL 提供了统一编程模型，Spring Boot 又为其中大多数提供了[自动配置](/glossary#自动配置auto-configuration)——掌握"定位 + starter + 连接键"三要素，切换存储的心智成本极低。
 
 ## 极简实现（以 MongoDB 为例）
 
@@ -102,10 +102,10 @@ public class CityDao {
 }
 ```
 
-启动时自动配置尝试连接 `mongodb://localhost/test`，其余什么都不用配。仓储与文档默认扫描**自动配置包**，需要自定义位置时用 `@EnableMongoRepositories`（仓储）与 `@EntityScan`（文档）。
+启动时[自动配置](/glossary#自动配置auto-configuration)尝试连接 `mongodb://localhost/test`，其余什么都不用配。仓储与文档默认扫描**自动配置包**，需要自定义位置时用 `@EnableMongoRepositories`（仓储）与 `@EntityScan`（文档）。
 
 ::: tip
-如果你不用 Spring Data MongoDB，也可以直接注入原生 `MongoClient`；定义了自己的 `MongoClientSettings` Bean 时 `spring.data.mongodb` 属性将被忽略。
+如果你不用 Spring Data MongoDB，也可以直接注入原生 `MongoClient`；定义了自己的 `MongoClientSettings` [Bean](/glossary#bean) 时 `spring.data.mongodb` 属性将被忽略。
 :::
 
 ## 关键注解与配置
@@ -165,11 +165,11 @@ spring:
 
 MongoDB 也可以不写 URI、改用离散属性：`spring.mongodb.host`、`spring.mongodb.port`、`spring.mongodb.additional-hosts[0]`、`spring.mongodb.database`、`spring.mongodb.username`、`spring.mongodb.password`。URI 与离散属性二选一，企业环境推荐 URI + 环境变量注入。
 
-各存储的高级定制入口：MongoDB 用 `MongoClientSettingsBuilderCustomizer`，Neo4j 用 `ConfigBuilderCustomizer`，Cassandra 用 `DriverConfigLoaderBuilderCustomizer`/`CqlSessionBuilderCustomizer`，Elasticsearch 用 `Rest5ClientBuilderCustomizer`——均为"声明一个 Bean 即生效"。
+各存储的高级定制入口：MongoDB 用 `MongoClientSettingsBuilderCustomizer`，Neo4j 用 `ConfigBuilderCustomizer`，Cassandra 用 `DriverConfigLoaderBuilderCustomizer`/`CqlSessionBuilderCustomizer`，Elasticsearch 用 `Rest5ClientBuilderCustomizer`——均为"声明一个 [Bean](/glossary#bean) 即生效"。
 
 ### MongoDB 深入：从仓储到 MongoTemplate
 
-`MongoTemplate` 与 Spring 的 `JdbcTemplate` 设计同源，Boot 自动配置好 Bean 供注入，覆盖 CRUD、聚合、地图Reduce式复杂操作；日常单表语义用方法名派生的 Repository，跨集合或动态条件落回 Template。两种风格在同一段代码里混用毫无障碍。
+`MongoTemplate` 与 Spring 的 `JdbcTemplate` 设计同源，Boot [自动配置](/glossary#自动配置auto-configuration)好 Bean 供注入，覆盖 CRUD、聚合、地图Reduce式复杂操作；日常单表语义用方法名派生的 Repository，跨集合或动态条件落回 Template。两种风格在同一段代码里混用毫无障碍。
 
 **响应式一句话**：若技术栈是 WebFlux，把 starter 换成 `spring-boot-starter-data-mongodb-reactive`，即可注入 `ReactiveMongoTemplate` 并声明返回 `Mono`/`Flux` 的响应式仓储——编程模型不变，返回类型换成响应式流。注意响应式驱动走 SSL 需要 Netty，Boot 会在 classpath 有 Netty 且未自定义时自动配好。
 
@@ -182,7 +182,7 @@ spring:
 
 ### Elasticsearch：客户端与仓储
 
-Spring Boot 支持三种 Elasticsearch 客户端：官方低层 REST 客户端（`elasticsearch-rest5-client`）、官方 Java API 客户端（`elasticsearch-java`，自动配置 `ElasticsearchClient`）、以及 Spring Data Elasticsearch 提供的响应式 `ReactiveElasticsearchClient`。默认目标 `localhost:9200`，用 `spring.elasticsearch.*` 属性调整；还可自动配置 `Sniffer` 自动发现集群节点（`spring.elasticsearch.restclient.sniffer.enabled=true`）。
+Spring Boot 支持三种 Elasticsearch 客户端：官方低层 REST 客户端（`elasticsearch-rest5-client`）、官方 Java API 客户端（`elasticsearch-java`，[自动配置](/glossary#自动配置auto-configuration) `ElasticsearchClient`）、以及 Spring Data Elasticsearch 提供的响应式 `ReactiveElasticsearchClient`。默认目标 `localhost:9200`，用 `spring.elasticsearch.*` 属性调整；还可自动配置 `Sniffer` 自动发现集群节点（`spring.elasticsearch.restclient.sniffer.enabled=true`）。
 
 仓储用法与 JPA 同构，实体改用 `@Document` 注解，查询按方法名派生：
 
@@ -204,7 +204,7 @@ public interface CitySummaryRepository extends Repository<CitySummary, String> {
 
 ### Neo4j / Cassandra / LDAP：什么场景选它
 
-**Neo4j——关系即数据**。数据的价值在"节点之间的关系"时选它：社交好友推荐（好友的好友喜欢什么）、反欺诈风控（担保环、资金链路）、知识图谱。节点用 `@Node` 标注，仓储继承 `Neo4jRepository`，方法名派生照样可用；starter 同时启用仓储与事务管理，经典与响应式两种风格都支持（响应式事务管理器需手动声明 `ReactiveNeo4jTransactionManager` Bean）。
+**Neo4j——关系即数据**。数据的价值在"节点之间的关系"时选它：社交好友推荐（好友的好友喜欢什么）、反欺诈风控（担保环、资金链路）、知识图谱。节点用 `@Node` 标注，仓储继承 `Neo4jRepository`，方法名派生照样可用；starter 同时启用仓储与事务管理，经典与响应式两种风格都支持（响应式事务管理器需手动声明 `ReactiveNeo4jTransactionManager` [Bean](/glossary#bean)）。
 
 ```java
 import org.springframework.data.neo4j.repository.Neo4jRepository;
@@ -239,11 +239,11 @@ public interface CityRepository extends Neo4jRepository<City, Long> {
 
 1. **连接 URI 凭据硬编码进仓库**。`spring.mongodb.uri=mongodb://admin:123456@...` 提交进 Git 等于裸奔，LDAP/Neo4j/Couchbase 的 `password` 同理。一律走环境变量或配置中心占位符（`${MONGODB_URI}`），生产再叠加网络隔离与 SSL bundle；各存储都支持 `ssl.enabled`/`ssl.bundle` 引用统一证书。
 
-2. **默认假设"NoSQL 没有事务"与反向假设"跨库也有事务"都危险**。MongoDB 4.0+ 在副本集下支持多文档事务但需显式启用、有性能成本；Cassandra仓储有限、本质偏最终一致；Neo4j starter 启用了事务管理但响应式风格要手动声明事务管理器 Bean。结论：跨文档/跨集合的强一致关键路径要么留在关系型，要么逐存储确认事务语义后再设计，切勿想当然。
+2. **默认假设"NoSQL 没有事务"与反向假设"跨库也有事务"都危险**。MongoDB 4.0+ 在副本集下支持多文档事务但需显式启用、有性能成本；Cassandra仓储有限、本质偏最终一致；Neo4j starter 启用了事务管理但响应式风格要手动声明事务管理器 [Bean](/glossary#bean)。结论：跨文档/跨集合的强一致关键路径要么留在关系型，要么逐存储确认事务语义后再设计，切勿想当然。
 
 3. **查询字段没建索引，全表扫描拖垮集群**。MongoDB 的方法名派生查询不会自动建索引，`findByNameAndStateAllIgnoringCase` 上线即 COLLSCAN。为高频查询字段手工建索引（`@Indexed`/`@CompoundIndex` 或脚本），并用 `explain` 验证；Cassandra 更严格——查询必须贴合分区键设计，先设计表再写查询。
 
-4. **测试直连共享开发库，数据互相污染**。NoSQL 的集成测试用 **Testcontainers** 拉起一次性 MongoDB/Elasticsearch 容器，配合 `@ServiceConnection` 自动注入连接属性，测试结束即销毁；LDAP 则优先用内嵌内存服务器（UnboundID + `spring.ldap.embedded.base-dn`），比真容器更快。
+4. **测试直连共享开发库，数据互相污染**。NoSQL 的集成测试用 **[Testcontainers](/glossary#testcontainers)** 拉起一次性 MongoDB/Elasticsearch 容器，配合 `@ServiceConnection` 自动注入连接属性，测试结束即销毁；LDAP 则优先用内嵌内存服务器（UnboundID + `spring.ldap.embedded.base-dn`），比真容器更快。
 
 5. **URI 里写死主机与拓扑，换环境全崩**。副本集成员列表、数据中心名（`local-datacenter`）、bucket 名散落在各环境配置里互不一致，是 NoSQL 事故高发区。按 profile 分层：`application-prod.yaml` 只放环境变量占位符，真实拓扑由部署平台注入；Cassandra 连接必三查 `keyspace-name`/`contact-points`/`local-datacenter`。
 

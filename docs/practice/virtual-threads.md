@@ -1,5 +1,5 @@
 ---
-title: "虚拟线程深度实践"
+title: "[虚拟线程](/glossary#虚拟线程-vs-平台线程)深度实践"
 description: "在 Spring Boot 4.1.1 中开启虚拟线程：适用场景判断表、各组件行为变化、pinning 检测、@Async 完整例与连接池并发匹配算术，以及生产避坑清单。"
 official: "https://docs.spring.io/spring-boot/4.1.1/reference/features/spring-application.html#features.spring-application.virtual-threads"
 ---
@@ -53,7 +53,7 @@ spring.threads.virtual.enabled=true   # 默认 false
 
 开启后，所有任务统一调度在一个 JVM 级平台线程池（载体线程）上——语料原文：*"virtual threads are scheduled on a JVM wide platform thread pool and not on dedicated thread pools"*。因此所有"配线程池"的属性同时失效（见下文行为变化表）。
 
-对应的 Java 形态变化：以前为 `@Async` 手工定制的线程池 Bean 现在应该删掉。
+对应的 Java 形态变化：以前为 `@Async` 手工定制的线程池 [Bean](/glossary#bean) 现在应该删掉。
 
 ```java
 // ❌ 开启虚拟线程后删除这类定制：池参数全部失效，白留 confusion
@@ -103,7 +103,7 @@ java -XX:StartFlightRecording:filename=recording.jfr,duration=10s -jar demo.jar
 log.info("handling on {}", Thread.currentThread());
 ```
 
-开启前输出 `handling on tomcat-1`（平台线程池名），开启后类似 `handling on VirtualThread[#53]/runnable@ForkJoinPool-1-worker-1`——前缀 `VirtualThread` 与载体 `ForkJoinPool-worker` 是两个最直观的信号（JDK 25 行为：虚拟线程默认无自定义名，编号由 JVM 分配）。
+开启前输出 `handling on tomcat-1`（平台线程池名），开启后类似 `handling on VirtualThread[#53]/runnable@ForkJoinPool-1-worker-1`——前缀 `VirtualThread` 与载体 `ForkJoinPool-worker` 是两个最直观的信号（JDK 25 行为：[虚拟线程](/glossary#虚拟线程-vs-平台线程)默认无自定义名，编号由 JVM 分配）。
 
 ### 第三步：让 JVM 别"悄悄退出"
 
@@ -115,13 +115,17 @@ spring.main.keep-alive=true   # 默认 false；保证 JVM 一直存活
 
 ## 关键注解与配置
 
+下图对比了虚拟线程与平台线程在阻塞时的行为差异——这是理解其收益与边界的关键：
+
+![下图对比了虚拟线程与平台线程在阻塞时的行为差异——这是理解其收益与边界的关键](/diagrams/virtual-threads.svg)
+
 一个开关牵动全局。先看行为变化总表，再看每个组件的具体写法。
 
 ### 开启后各组件行为变化表
 
 | 组件 | 开启后的变化 | 依据 |
 | --- | --- | --- |
-| 内嵌 Tomcat（请求处理线程） | 请求处理改由虚拟线程承载；容器线程池参数不再是有效调参点 | 机制依据语料"统一 JVM 级调度 + 专用池配置失效"（Tomcat 适配细节语料未展开，属 Boot 行为） |
+| 内嵌 Tomcat（请求处理线程） | 请求处理改由[虚拟线程](/glossary#虚拟线程-vs-平台线程)承载；容器线程池参数不再是有效调参点 | 机制依据语料"统一 JVM 级调度 + 专用池配置失效"（Tomcat 适配细节语料未展开，属 Boot 行为） |
 | `@Async`（applicationTaskExecutor） | `spring.task.execution.pool.core-size / max-size / queue-capacity / keep-alive / allow-core-thread-timeout` **全部失效**（附录对每个键标注 "Doesn't have an effect if virtual threads are enabled"） | 语料 + 附录 |
 | `@Scheduled` | 调度线程变为虚拟（守护）线程，不再维持 JVM 存活；`spring.task.scheduling.pool.size` 失效 | 语料 + 附录 |
 | 消息监听容器 | 语料明确 "This not only affects scheduling and can be the case with other technologies too"——监听线程同样变为守护线程；绑定专用池的并发参数同样失效 | 语料（推断部分已标注） |
@@ -168,7 +172,7 @@ public class ReportService {
 
 ### 深入：调度模型 60 秒版
 
-读懂三个词，排查问题不慌（JDK 25 行为，机制描述以 JDK 官方虚拟线程文档为准）：
+读懂三个词，排查问题不慌（JDK 25 行为，机制描述以 JDK 官方[虚拟线程](/glossary#虚拟线程-vs-平台线程)文档为准）：
 
 - **载体线程（carrier）**：JVM 内部的平台线程池，默认大小约等于 CPU 核数，负责真正执行虚拟线程的代码；
 - **挂起（unmount）**：虚拟线程遇到托管阻塞（IO、`sleep`、等锁、等连接）时，把栈从载体线程上摘下来放进 JVM 队列，载体线程立刻去跑下一个任务——这是"百万线程"的底气；
@@ -203,11 +207,11 @@ public class ReportService {
 池吞吐上限 ≈ 10 连接 × (1000ms / 20ms) = 500 QPS
 ```
 
-现在 1000 个虚拟线程同时到达：
+现在 1000 个[虚拟线程](/glossary#虚拟线程-vs-平台线程)同时到达：
 
 - 前 10 个拿到连接，正常执行；
 - 其余 990 个 park 在 Hikari 借连接的等待队列上——**不占平台线程、几乎不耗内存，这是虚拟线程真正的进步**；
-- 但数据库吞吐上限依然是 500 QPS：虚拟线程只是把"线程不够"重新包装成"连接超时"。`connection-timeout`（HikariCP 默认 30s）内排不上队就抛 `SQLException`。
+- 但数据库吞吐上限依然是 500 QPS：虚拟线程只是把"线程不够"重新包装成"连接超时"。`connection-timeout`（[HikariCP](/glossary#连接池hikaricp) 默认 30s）内排不上队就抛 `SQLException`。
 
 结论：**虚拟线程不是连接池扩容器**。池大小应贴近数据库承载力；入口并发用限流（信号量 / 网关限流）控制，而不是指望 1000 个线程"更努力"。
 
@@ -233,13 +237,13 @@ public void onOrderEvent(OrderEvent event) {
 
 | 键 | 说明 | 默认值 |
 | --- | --- | --- |
-| `spring.threads.virtual.enabled` | 是否使用虚拟线程 | `false` |
+| `spring.threads.virtual.enabled` | 是否使用[虚拟线程](/glossary#虚拟线程-vs-平台线程) | `false` |
 | `spring.main.keep-alive` | 无非守护线程时是否保持应用存活 | `false` |
 | `spring.task.execution.pool.core-size` | @Async 核心线程数（开启后无效） | `8` |
 | `spring.task.scheduling.pool.size` | @Scheduled 池大小（开启后无效） | `1` |
 
 ::: warning 连接池大小不会因虚拟线程而变大
-虚拟线程解决的是"线程贵"，不解决"连接贵"：HikariCP 连接池默认大小不变，开启虚拟线程后并发上来反而会先打满连接池。连接池大小要与真实并发重新评估，不是开个开关就万事大吉。
+虚拟线程解决的是"线程贵"，不解决"连接贵"：[HikariCP](/glossary#连接池hikaricp) 连接池默认大小不变，开启虚拟线程后并发上来反而会先打满连接池。连接池大小要与真实并发重新评估，不是开个开关就万事大吉。
 :::
 
 ## 避坑指南

@@ -1,6 +1,6 @@
 ---
 title: "REST API 开发全规范"
-description: "@RestController + record DTO、完整分层链路、文件上传下载、分页排序、ProblemDetail 统一异常与 CORS，一套可上生产的 REST 规范。"
+description: "@RestController + record [DTO](/glossary#dto)、完整分层链路、文件上传下载、分页排序、ProblemDetail 统一异常与 CORS，一套可上生产的 REST 规范。"
 official: "https://docs.spring.io/spring-boot/4.1.1/reference/web/servlet.html"
 ---
 
@@ -8,7 +8,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/reference/web/servlet.html"
 
 本章你会学到：从 Controller→Service→Repository 的完整分层写法，到文件上传下载、分页排序、ProblemDetail 统一异常与 CORS 配置的整套生产级 REST 实践。
 
-> **上一章**：[IoC、依赖注入与配置绑定](/guide/ioc-di) · **下一章**：[配置管理与多环境](/guide/configuration)
+> **上一章**：[[IoC](/glossary#ioc-容器与-ioc-容器)、依赖注入与配置绑定](/guide/ioc-di) · **下一章**：[配置管理与多环境](/guide/configuration)
 
 ## 业务场景
 
@@ -137,7 +137,7 @@ public class OrderController {
 
 ### 完整分层链路：一个用户模块走通
 
-把 Controller → Service → Repository → DTO 转换整条链走通，之后每个模块照此复制：
+把 Controller → Service → Repository → [DTO](/glossary#dto) 转换整条链走通，之后每个模块照此复制：
 
 ::: code-group
 
@@ -255,7 +255,7 @@ public class UserController {
 }
 ```
 
-```java [入参与视图 DTO]
+```java [入参与视图 [DTO](/glossary#dto)]
 public record CreateUserRequest(@NotBlank String username, @Email String email) {}
 
 public record UserView(Long id, String username, String email, java.time.Instant createdAt) {
@@ -421,7 +421,7 @@ public class GlobalExceptionHandler {
 @Configuration(proxyBeanMethods = false)
 public class CorsConfiguration {
 
-    @Bean
+    @[Bean](/glossary#bean)
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override

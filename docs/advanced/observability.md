@@ -17,7 +17,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/reference/actuator/endpoints
 
 端点访问控制会用到 `SecurityFilterChain`（见[安全与鉴权](/advanced/security)）；探针接入 K8s 的做法见[打包、镜像与部署](/advanced/deployment)。
 
-> **上一章**：[测试策略与 Testcontainers](/advanced/testing) · **下一章**：[打包、镜像与部署](/advanced/deployment)
+> **上一章**：[测试策略与 [Testcontainers](/glossary#testcontainers)](/advanced/testing) · **下一章**：[打包、镜像与部署](/advanced/deployment)
 
 ## 业务场景
 

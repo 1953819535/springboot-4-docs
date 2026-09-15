@@ -1,5 +1,5 @@
 ---
-title: "测试策略与 Testcontainers"
+title: "测试策略与 [Testcontainers](/glossary#testcontainers)"
 description: "Spring Boot 4.1.1 测试实战：测试金字塔分层、不启 Spring 的纯单元测试、@WebMvcTest/@DataJpaTest/@JsonTest 切片全家福、MockMvcTester 断言、Testcontainers 与 @ServiceConnection、测试配置隔离与数据清理策略。"
 official: "https://docs.spring.io/spring-boot/4.1.1/reference/testing/index.html"
 ---
@@ -12,14 +12,14 @@ official: "https://docs.spring.io/spring-boot/4.1.1/reference/testing/index.html
 ## 业务场景
 
 ::: tip 术语速览
-**Mock**：测试时替换真实依赖的"假对象"，预设返回值以隔离被测代码。**切片测试**：只加载某一层 Bean 的测试（@WebMvcTest 只装 Web 层），快而准。**Testcontainers**：测试中用 Docker 拉起真实数据库/中间件容器，`@ServiceConnection` 自动接线。更多见 [核心概念速查](/glossary)。
+**[Mock](/glossary#mock)**：测试时替换真实依赖的"假对象"，预设返回值以隔离被测代码。**[切片测试](/glossary#切片测试test-slice)**：只加载某一层 [Bean](/glossary#bean) 的测试（@WebMvcTest 只装 Web 层），快而准。**Testcontainers**：测试中用 Docker 拉起真实数据库/中间件容器，`@ServiceConnection` 自动接线。更多见 [核心概念速查](/glossary)。
 :::
 
 
 企业项目的三类测试诉求：纯逻辑秒级跑完（单元测试）、只加载 Web 层验证路由与校验（切片测试）、连真实 PostgreSQL/Redis 跑完整请求（集成测试）。Spring Boot 的测试模块按这个金字塔分层，`@SpringBootTest` 全量上下文是最后手段而不是默认动作。
 
 ::: tip 速度判断
-切片测试只装需要的自动配置，上下文秒起；全量 `@SpringBootTest` 一次起全家桶。先用切片，切片覆盖不了再全量——上下文缓存机制会让同配置切片在多个测试类间复用，速度优势随用例数放大。
+切片测试只装需要的[自动配置](/glossary#自动配置auto-configuration)，上下文秒起；全量 `@SpringBootTest` 一次起全家桶。先用切片，切片覆盖不了再全量——上下文缓存机制会让同配置切片在多个测试类间复用，速度优势随用例数放大。
 :::
 
 ## 极简实现
@@ -81,7 +81,7 @@ class OrderPricingTest {
 
     @Test
     void vipEnjoyDiscount() {
-        // 纯对象协作，无 Spring、无 Mock，毫秒级完成
+        // 纯对象协作，无 Spring、无 [Mock](/glossary#mock)，毫秒级完成
         Money total = pricing.total(
                 List.of(new OrderItem("book", 2, Money.of("39.90"))),
                 CustomerType.VIP);
@@ -180,7 +180,7 @@ class UserResponseJsonTest {
 
 ```java
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Testcontainers
+@[Testcontainers](/glossary#testcontainers)
 class UserFlowIT {
 
     @Container
@@ -284,7 +284,7 @@ class WithNestedConfigTests {
 
     @TestConfiguration(proxyBeanMethods = false)
     static class FixedClockConfig {
-        @Bean
+        @[Bean](/glossary#bean)
         Clock clock() { return Clock.fixed(Instant.parse("2026-01-01T00:00:00Z"), ZoneOffset.UTC); }
     }
 
@@ -365,7 +365,7 @@ class OrderFlowIT {
 
 ## 关键注解与配置
 
-**切片注解速查（各切片默认导入的自动配置见官方附录）**：
+**切片注解速查（各切片默认导入的[自动配置](/glossary#自动配置auto-configuration)见官方附录）**：
 
 | 切片注解 | 加载范围 | 典型用途 |
 | --- | --- | --- |
@@ -374,7 +374,7 @@ class OrderFlowIT {
 | `@DataJpaTest` | JPA：仓储/实体/内嵌库 | 查询逻辑（默认回滚） |
 | `@JdbcTest` / `@DataJdbcTest` | DataSource/JdbcClient 或 Spring Data JDBC | SQL 直查 |
 | `@RestClientTest` | RestClient/@HttpExchange 客户端 | 远端调用契约（MockRestServiceServer 配套） |
-| `@JsonTest` | Jackson 序列化 | DTO 契约 |
+| `@JsonTest` | Jackson 序列化 | [DTO](/glossary#dto) 契约 |
 | `@DataMongoTest` 等 | 对应 NoSQL | 仓储逻辑 |
 
 **核心注解**：
@@ -383,8 +383,8 @@ class OrderFlowIT {
 | --- | --- | --- |
 | `@SpringBootTest(RANDOM_PORT)` | 全量上下文 + 真实端口 | 集成测试标配；默认 MOCK 环境无真端口 |
 | `@LocalServerPort` | 注入随机端口 | 与 RANDOM_PORT 配套 |
-| `@MockitoBean` / `@MockitoSpyBean` | 替换/包装容器中的 Bean | 切片隔离 Service 层（Framework 7 注解） |
-| `@ServiceConnection` | 容器连接自动配置 | 覆盖清单见上文 Testcontainers 一节 |
+| `@MockitoBean` / `@MockitoSpyBean` | 替换/包装容器中的 [Bean](/glossary#bean) | 切片隔离 Service 层（Framework 7 注解） |
+| `@ServiceConnection` | 容器连接自动配置 | 覆盖清单见上文 [Testcontainers](/glossary#testcontainers) 一节 |
 | `@Testcontainers` + `@Container` | 容器生命周期 | static 字段全类共享，启停一次 |
 | `@ImportTestcontainers` | 导入容器声明接口 | 容器交给 Spring 生命周期管理 |
 | `MockMvcTester` / `RestTestClient` | 断言式 MVC / HTTP 测试 | AssertJ 风格链式断言 |
@@ -399,7 +399,7 @@ class OrderFlowIT {
 
 ## 避坑指南
 
-- **切片测试改了配置不生效**：同配置切片共享上下文缓存，改了 `application-test.yaml` 后旧的缓存上下文仍在——`mvn test` 全新 JVM 才算数；`@DirtiesContext` 是核武器，按类精准使用。
+- **[切片测试](/glossary#切片测试test-slice)改了配置不生效**：同配置切片共享上下文缓存，改了 `application-test.yaml` 后旧的缓存上下文仍在——`mvn test` 全新 JVM 才算数；`@DirtiesContext` 是核武器，按类精准使用。
 - **嵌套 `@Configuration` 会顶掉主配置**：测试类里想"追加 Bean"必须用 `@TestConfiguration`；嵌套普通 `@Configuration` 一旦生效，`@SpringBootApplication` 的整棵扫描树都被替换，报错往往是一大片 `NoSuchBeanDefinitionException`。
 - **`@Transactional` 回滚在真实端口下失效**：`RANDOM_PORT`/`DEFINED_PORT` 时 HTTP 客户端与服务端在不同线程、不同事务，服务端落库不会回滚——集成层清理交给 `@Sql` 或 TRUNCATE 钩子，不要指望注解回滚。
 - **Testcontainers 需要 Docker**：CI 无 Docker 时该层测试直接失败；把集成测试隔离到 `*IT` 命名（Maven Failsafe / Gradle 独立 task），单元与切片先跑、容器层后跑。

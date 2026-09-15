@@ -8,7 +8,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/appendix/deprecated-applicat
 
 > 本页是全站唯一出现"旧名"的页面——仅作迁移对照用。正文各章一律只写 4.1.1 现行写法。
 
-> **上一章**：[注解、Starter 与配置项速查](/reference/api) · **下一章**：[核心概念速查（零基础术语表）](/glossary)
+> **上一章**：[注解、[Starter](/glossary#starter) 与配置项速查](/reference/api) · **下一章**：[核心概念速查（零基础术语表）](/glossary)
 
 ## 业务场景
 
@@ -25,7 +25,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/appendix/deprecated-applicat
 | 旧写法（已剔除） | 现行写法（本手册基线） | 说明 |
 | --- | --- | --- |
 | `javax.*` 全系导包 | `jakarta.*`（Jakarta EE 11） | Servlet 6.1 / JPA 3.2 / Validation 3.1 / Annotation API 全部走 jakarta 命名空间 |
-| JDK 8/11/17 作为推荐运行时 | **JDK 25 LTS**（最低 17，兼容至 26） | 虚拟线程、Record 模式匹配、未命名变量等现代语法全面启用 |
+| JDK 8/11/17 作为推荐运行时 | **JDK 25 LTS**（最低 17，兼容至 26） | [虚拟线程](/glossary#虚拟线程-vs-平台线程)、Record 模式匹配、未命名变量等现代语法全面启用 |
 | `javax.annotation.PostConstruct` | `jakarta.annotation.PostConstruct` | 生命周期注解换空间，语义不变 |
 
 ### Web 与 REST
@@ -41,9 +41,9 @@ official: "https://docs.spring.io/spring-boot/4.1.1/appendix/deprecated-applicat
 
 | 旧写法（已剔除） | 现行写法（本手册基线） | 说明 |
 | --- | --- | --- |
-| `WebSecurityConfigurerAdapter` | `SecurityFilterChain` Bean + lambda DSL | 旧适配器在 Security 7 已不存在 |
+| `WebSecurityConfigurerAdapter` | `SecurityFilterChain` [Bean](/glossary#bean) + lambda DSL | 旧适配器在 Security 7 已不存在 |
 | `authorizeRequests()` / `antMatchers()` / `mvcMatchers()` | `authorizeHttpRequests()` + `requestMatchers()` | 新授权 API，模式匹配统一 |
-| 手写 `OncePerRequestFilter` 解析 JWT（新项目默认） | `spring-boot-starter-oauth2-resource-server` + JWT decoder | 框架级 JWT 校验，少写过滤器少踩坑 |
+| 手写 `OncePerRequestFilter` 解析 [JWT](/glossary#jwt--csrf--cors-速记)（新项目默认） | `spring-boot-starter-oauth2-resource-server` + JWT decoder | 框架级 JWT 校验，少写过滤器少踩坑 |
 
 ### 数据访问
 
@@ -51,7 +51,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/appendix/deprecated-applicat
 | --- | --- | --- |
 | `JdbcTemplate` 手写列映射（新代码） | `JdbcClient` 流式 API | 4.x 推荐的查询/更新统一入口，record 映射顺滑 |
 | `javax.persistence.*` JPA 注解 | `jakarta.persistence.*` | 同命名空间迁移 |
-| 手写 SQL 脚本管理表结构 | Flyway（`spring-boot-starter-flyway`，坐标以官方语料为准） | 版本化迁移，启动即校验 |
+| 手写 SQL 脚本管理表结构 | [Flyway](/glossary#flyway-与数据库迁移)（`spring-boot-starter-flyway`，坐标以官方语料为准） | 版本化迁移，启动即校验 |
 
 ### 配置项（旧键 → 新键）
 
@@ -74,7 +74,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/appendix/deprecated-applicat
 | --- | --- | --- |
 | Spring Boot CLI 跑 Groovy 脚本 | CLI 仅剩 `init` / `encodepassword` / `shell` | 4.x CLI 定位为脚手架工具 |
 | DevTools LiveReload | 已弃用（4.1.0 起，无替代） | 静态资源热加载改用构建工具链 |
-| Zipkin Brave 自动配置 | Micrometer Tracing + OTel | 官方预告 4.2 移除 Brave 自动配置 |
+| Zipkin Brave [自动配置](/glossary#自动配置auto-configuration) | Micrometer Tracing + OTel | 官方预告 4.2 移除 Brave 自动配置 |
 
 ## 避坑指南
 

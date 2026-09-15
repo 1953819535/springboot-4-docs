@@ -35,7 +35,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/reference/messaging/kafka.ht
 
 ### Kafka：发送与接收
 
-引入 `spring-boot-starter-kafka` 后 `KafkaTemplate` 自动配置，`spring.kafka.*` 控制全部行为：
+引入 `spring-boot-starter-kafka` 后 `KafkaTemplate` [自动配置](/glossary#自动配置auto-configuration)，`spring.kafka.*` 控制全部行为：
 
 ```yaml
 spring:
@@ -64,7 +64,7 @@ public class OrderEventPublisher {
 }
 ```
 
-消费端任意 Bean 加 `@KafkaListener` 即成为监听端点；未定义 `KafkaListenerContainerFactory` 时，Boot 用 `spring.kafka.listener.*` 自动配置默认工厂：
+消费端任意 [Bean](/glossary#bean) 加 `@KafkaListener` 即成为监听端点；未定义 `KafkaListenerContainerFactory` 时，Boot 用 `spring.kafka.listener.*` [自动配置](/glossary#自动配置auto-configuration)默认工厂：
 
 ```java
 @Component
@@ -77,7 +77,7 @@ public class OrderEventConsumer {
 }
 ```
 
-启动时自动建 Topic：声明一个 `NewTopic` Bean 即可，已存在则忽略。
+启动时自动建 Topic：声明一个 `NewTopic` [Bean](/glossary#bean) 即可，已存在则忽略。
 
 ::: tip
 若定义了 `RecordFilterStrategy`、`CommonErrorHandler`、`AfterRollbackProcessor` 或 `ConsumerAwareRebalanceListener` Bean，会自动关联到默认工厂——错误处理与过滤逻辑按 Bean 装配，不用手动 set。
@@ -114,7 +114,7 @@ public void onOrderEvent(OrderEvent event) {
 
 ### RabbitMQ：发送与接收
 
-引入 `spring-boot-starter-amqp`，`AmqpTemplate` / `AmqpAdmin` 自动配置：
+引入 `spring-boot-starter-amqp`，`AmqpTemplate` / `AmqpAdmin` [自动配置](/glossary#自动配置auto-configuration)：
 
 ```yaml
 spring:
@@ -153,7 +153,7 @@ public class NotificationConsumer {
 }
 ```
 
-两个自动化行为要记住：**Queue Bean 自动向 broker 声明**；**MessageConverter Bean 自动关联**到模板与监听容器工厂（JSON 消息换 `Jackson2JsonMessageConverter` 一个 Bean 即可）。发送侧网络抖动用模板重试兜底：
+两个自动化行为要记住：**Queue [Bean](/glossary#bean) 自动向 broker 声明**；**MessageConverter Bean 自动关联**到模板与监听容器工厂（JSON 消息换 `Jackson2JsonMessageConverter` 一个 Bean 即可）。发送侧网络抖动用模板重试兜底：
 
 ```yaml
 spring:
@@ -166,7 +166,7 @@ spring:
 
 ### JMS：发送与接收
 
-引入 `spring-boot-starter-activemq`（或 `spring-boot-starter-artemis`）。Spring Boot 自动配置了更流畅的 `JmsClient`：
+引入 `spring-boot-starter-activemq`（或 `spring-boot-starter-artemis`）。Spring Boot [自动配置](/glossary#自动配置auto-configuration)了更流畅的 `JmsClient`：
 
 ```java
 @Component
@@ -227,7 +227,7 @@ public void onOrderEvent(OrderEvent event, Acknowledgment ack) {
 
 ### 深入：Kafka 异常处理与死信
 
-监听器抛异常且无人接住时，容器会在同一条消息上反复重试——一条毒消息就能卡住整个分区。Boot 的装配姿势是注册 `CommonErrorHandler` Bean（自动关联默认工厂）：有限次退避重试 + 死信 Topic 兜底：
+监听器抛异常且无人接住时，容器会在同一条消息上反复重试——一条毒消息就能卡住整个分区。Boot 的装配姿势是注册 `CommonErrorHandler` [Bean](/glossary#bean)（自动关联默认工厂）：有限次退避重试 + 死信 Topic 兜底：
 
 ```java
 @Configuration(proxyBeanMethods = false)
@@ -281,7 +281,7 @@ spring:
           multiplier: 2
 ```
 
-重试耗尽后默认用 `RejectAndDontRequeueRecoverer` 拒绝消息；需要自定义恢复逻辑就声明 `MessageRecoverer` Bean（自动关联默认工厂），也可用 `RabbitListenerRetrySettingsCustomizer` Bean 编程式定制 RetryPolicy。
+重试耗尽后默认用 `RejectAndDontRequeueRecoverer` 拒绝消息；需要自定义恢复逻辑就声明 `MessageRecoverer` [Bean](/glossary#bean)（自动关联默认工厂），也可用 `RabbitListenerRetrySettingsCustomizer` Bean 编程式定制 RetryPolicy。
 
 **第三层：死信队列**。被拒绝且不重回的消息去哪？由 broker 侧的死信交换机（DLX）决定——给业务队列声明 `x-dead-letter-exchange` 参数即可，死信自动路由到绑定的死信队列：
 
@@ -332,7 +332,7 @@ public DefaultJmsListenerContainerFactory myFactory(
 
 | 注解 / 配置 | 作用 |
 | --- | --- |
-| `@KafkaListener(topics, groupId)` | Kafka 消费端点；容器工厂按 `spring.kafka.listener.*` 自动配置 |
+| `@KafkaListener(topics, groupId)` | Kafka 消费端点；容器工厂按 `spring.kafka.listener.*` [自动配置](/glossary#自动配置auto-configuration) |
 | `spring.kafka.listener.concurrency` | Kafka 消费线程数，与分区数对齐，超出只空转 |
 | `spring.kafka.listener.ack-mode` | 提交模式（`manual` / `manual-immediate` / `batch` / `count`…），manual 需注入 `Acknowledgment` |
 | `spring.kafka.producer.transaction-id-prefix` | 非空即启用事务生产者并装配 `KafkaTransactionManager` |
@@ -344,7 +344,7 @@ public DefaultJmsListenerContainerFactory myFactory(
 | `spring.rabbitmq.publisher-confirm-type` | 生产确认，`correlated` 为异步逐条确认 |
 | `@JmsListener(destination)` | JMS 消费端点，默认工厂事务性 |
 | `spring.jms.listener.min-concurrency` / `max-concurrency` | JMS 并发消费者数区间 |
-| `NewTopic` / `Queue` Bean | 启动时自动向 broker 声明 Topic / 队列 |
+| `NewTopic` / `Queue` [Bean](/glossary#bean) | 启动时自动向 broker 声明 Topic / 队列 |
 
 ## 避坑指南
 

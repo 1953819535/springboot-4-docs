@@ -1,6 +1,6 @@
 ---
 title: "常见问题（FAQ）"
-description: "Spring Boot 4.1.1 高频问题速答：启动失败与启动慢排查、依赖冲突、属性不生效、循环依赖、连接池、时区序列化、跨域、上传限制、虚拟线程、事务失效与测试上下文缓存。"
+description: "Spring Boot 4.1.1 高频问题速答：启动失败与启动慢排查、依赖冲突、属性不生效、循环依赖、连接池、时区序列化、跨域、上传限制、[虚拟线程](/glossary#虚拟线程-vs-平台线程)、事务失效与测试上下文缓存。"
 ---
 
 # 常见问题（FAQ）
@@ -15,12 +15,12 @@ description: "Spring Boot 4.1.1 高频问题速答：启动失败与启动慢排
 java -jar app.jar --debug
 ```
 
-`--debug`（或 `-Ddebug`）会输出**条件评估报告**：哪些自动配置命中、哪些没命中、原因是什么，是排查启动失败的第一入口；Actuator 应用可直接看 `/actuator/conditions`。
+`--debug`（或 `-Ddebug`）会输出**条件评估报告**：哪些[自动配置](/glossary#自动配置auto-configuration)命中、哪些没命中、原因是什么，是排查启动失败的第一入口；Actuator 应用可直接看 `/actuator/conditions`。
 出处：`spring-boot-4.1.1-docs/reference/using/auto-configuration.md`
 
 ### 应用启动慢，怎么排查？
 
-三步：① `--debug` 看条件评估报告，确认没加载用不到的自动配置；② 启动追踪——`application.setApplicationStartup(new BufferingApplicationStartup(2048))` 后看 `startup` 端点逐步列出 Bean 初始化耗时；③ 缓解：`spring.main.lazy-initialization=true` 全局懒加载，或只给重 Bean 加 `@Lazy`。
+三步：① `--debug` 看条件评估报告，确认没加载用不到的自动配置；② 启动追踪——`application.setApplicationStartup(new BufferingApplicationStartup(2048))` 后看 `startup` 端点逐步列出 [Bean](/glossary#bean) 初始化耗时；③ 缓解：`spring.main.lazy-initialization=true` 全局[懒加载](/glossary#懒加载lazy-loading)，或只给重 Bean 加 `@Lazy`。
 出处：`spring-boot-4.1.1-docs/reference/features/spring-application.md`（Application Startup tracking）、`spring-boot-4.1.1-docs/reference/actuator/endpoints.md`（startup 端点）
 
 ### 端口被占用：Port 8080 was already in use
@@ -78,10 +78,10 @@ java -jar app.jar --debug
 
 ### 连接池打满：获取连接超时 / 请求堆积？
 
-先看指标再动手：`/actuator/metrics/hikaricp.connections.active`（活跃数）、`hikaricp.connections.pending`（排队数）反映池水位。处理顺序：① 查慢 SQL 与过大的事务范围（连接被长事务占着，调大池子只是推迟爆炸）；② 查连接泄漏——`spring.datasource.hikari.leak-detection-threshold=30s` 让 HikariCP 标记疑似泄漏；③ 确属容量不足再调 `spring.datasource.hikari.maximum-pool-size`。
+先看指标再动手：`/actuator/metrics/hikaricp.connections.active`（活跃数）、`hikaricp.connections.pending`（排队数）反映池水位。处理顺序：① 查慢 SQL 与过大的事务范围（连接被长事务占着，调大池子只是推迟爆炸）；② 查连接泄漏——`spring.datasource.hikari.leak-detection-threshold=30s` 让 [HikariCP](/glossary#连接池hikaricp) 标记疑似泄漏；③ 确属容量不足再调 `spring.datasource.hikari.maximum-pool-size`。
 出处：`spring-boot-4.1.1-docs/reference/actuator/metrics.md`（DataSource/Hikari 指标）、`spring-boot-4.1.1-docs/appendix/application-properties/index.md`（hikari 键）
 
-## 虚拟线程
+## 
 
 ### 什么时候不该开虚拟线程？
 
@@ -97,11 +97,11 @@ Spring 测试框架按配置缓存上下文：配置不同就重建。尽量让�
 
 ### 测试要 Docker：CI 环境没有 Docker 怎么办？
 
-Testcontainers 的集成测试需要可用的 Docker 环境，CI 没有 Docker 时要么安装 Docker/替代运行时，要么把该类测试降级为内嵌数据库版本。Docker Compose 生命周期支持默认不进测试（`spring.docker.compose.skip.in-tests` 默认 `true`）。出处：`spring-boot-4.1.1-docs/reference/testing/testcontainers.md`、`spring-boot-4.1.1-docs/appendix/application-properties/index.md`（spring.docker.compose.* 默认值）
+[Testcontainers](/glossary#testcontainers) 的集成测试需要可用的 Docker 环境，CI 没有 Docker 时要么安装 Docker/替代运行时，要么把该类测试降级为内嵌数据库版本。Docker Compose 生命周期支持默认不进测试（`spring.docker.compose.skip.in-tests` 默认 `true`）。出处：`spring-boot-4.1.1-docs/reference/testing/testcontainers.md`、`spring-boot-4.1.1-docs/appendix/application-properties/index.md`（spring.docker.compose.* 默认值）
 
 ### Lombok 与 record 怎么选？
 
-数据载体（DTO、配置、实体字段投影）优先 record：不可变、免 Lombok；需要可变对象或 JPA 实体仍用 class + Lombok。
+数据载体（[DTO](/glossary#dto)、配置、实体字段投影）优先 record：不可变、免 Lombok；需要可变对象或 JPA 实体仍用 class + Lombok。
 出处：`spring-boot-4.1.1-docs/reference/features/external-config.md`（Lombok 生成 getter/setter 的注意事项）、`guide/ioc-di`（本手册）
 
 ::: tip 按同样格式补充新问题

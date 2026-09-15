@@ -22,7 +22,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/reference/io/grpc.html"
 | 需求 | 方案 | 说明 |
 | --- | --- | --- |
 | 服务端暴露 gRPC 接口 | `spring-boot-starter-grpc-server` | 默认 Netty，监听 9090 |
-| 客户端调用远端服务 | `spring-boot-starter-grpc-client` | stub 作为 Bean 注入 |
+| 客户端调用远端服务 | `spring-boot-starter-grpc-client` | stub 作为 [Bean](/glossary#bean) 注入 |
 | 契约先行 | `.proto` 文件 + 代码生成 | Maven/Gradle 插件均受支持 |
 | 内部高频、低延迟 | gRPC（二进制 + HTTP/2） | 比 JSON 文本更小更快 |
 
@@ -74,11 +74,11 @@ Spring Boot 为 `io.github.ascopes:protobuf-maven-plugin` 提供了依赖管理�
 </build>
 ```
 
-> 💡 **提示**：Gradle 用户用 `com.google.protobuf` 插件（Boot 管理版本并自动配置 `protoc` 与 `protoc-gen-grpc-java`），`.proto` 同样放 `src/main/proto`。
+> 💡 **提示**：Gradle 用户用 `com.google.protobuf` 插件（Boot 管理版本并[自动配置](/glossary#自动配置auto-configuration) `protoc` 与 `protoc-gen-grpc-java`），`.proto` 同样放 `src/main/proto`。
 
 ### 第三步：实现服务端
 
-引入 `spring-boot-starter-grpc-server`，继承生成基类并加 `@GrpcService`。Spring gRPC 会把任何实现了 `BindableService` 的 Bean 自动暴露为 gRPC 服务——生成的基类都实现了它，注册为 Bean 就够了：
+引入 `spring-boot-starter-grpc-server`，继承生成基类并加 `@GrpcService`。Spring gRPC 会把任何实现了 `BindableService` 的 [Bean](/glossary#bean) 自动暴露为 gRPC 服务——生成的基类都实现了它，注册为 Bean 就够了：
 
 ```java
 import io.grpc.stub.StreamObserver;
@@ -132,7 +132,7 @@ spring.grpc.client.channel.hello.inbound.keepalive.timeout=40s
 spring.grpc.client.channel.hello.inbound.message.max-size=8MB
 ```
 
-stub 与普通 Bean 一样注入使用（`BlockingStub` 的方法调用是同步阻塞的）：
+stub 与普通 [Bean](/glossary#bean) 一样注入使用（`BlockingStub` 的方法调用是同步阻塞的）：
 
 ```java
 @Component
@@ -336,7 +336,7 @@ try {
 
 ### 深入：拦截器与鉴权
 
-**服务端 + Spring Security**：Spring gRPC 提供与 Web 应用同风格的声明式安全。Spring Boot 自动配置了 `GrpcSecurity` 与 `SecurityGrpcExceptionHandler`，最常用做法是在 gRPC 服务 Bean 上直接加 `@PreAuthorize`，或定义 `AuthenticationProcessInterceptor` Bean。详见 [Spring gRPC 文档：声明式安全](https://docs.spring.io/spring-grpc/reference/1.1/server.html#_declarative_security_with_spring_security)。
+**服务端 + Spring Security**：Spring gRPC 提供与 Web 应用同风格的声明式安全。Spring Boot [自动配置](/glossary#自动配置auto-configuration)了 `GrpcSecurity` 与 `SecurityGrpcExceptionHandler`，最常用做法是在 gRPC 服务 [Bean](/glossary#bean) 上直接加 `@PreAuthorize`，或定义 `AuthenticationProcessInterceptor` Bean。详见 [Spring gRPC 文档：声明式安全](https://docs.spring.io/spring-grpc/reference/1.1/server.html#_declarative_security_with_spring_security)。
 
 **Servlet 容器模式**：gRPC 服务跑在标准 Servlet 容器里时，用常规 Web 安全配置即可，Boot 还提供了 gRPC 请求匹配器：
 
@@ -501,4 +501,4 @@ class MyGrpcTests {
 
 - 官方镜像：`spring-boot-4.1.1-docs/reference/io/grpc.md`（本章全部事实来源）、`appendix/application-properties/index.md`（spring.grpc.*）、`appendix/dependency-coordinates/coordinates.md`（starter 坐标）
 - 官方在线：[gRPC 支持](https://docs.spring.io/spring-boot/4.1.1/reference/io/grpc.html) · [Spring gRPC 文档](https://docs.spring.io/spring-grpc/reference/1.1/) · [gRPC 核心概念](https://grpc.io/docs/what-is-grpc/core-concepts/) · [Status 码定义](https://grpc.io/docs/guides/error/)
-- 站内：[虚拟线程深度实践](/practice/virtual-threads)（上章）· [消息：Kafka、AMQP 与 JMS](/practice/messaging)（内部异步解耦）· [安全](/advanced/security)（@PreAuthorize 体系）
+- 站内：[[虚拟线程](/glossary#虚拟线程-vs-平台线程)深度实践](/practice/virtual-threads)（上章）· [消息：Kafka、AMQP 与 JMS](/practice/messaging)（内部异步解耦）· [安全](/advanced/security)（@PreAuthorize 体系）

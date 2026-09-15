@@ -38,7 +38,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/reference/io/caching.html"
 
 ### 开启缓存抽象
 
-Spring Boot 检测到缓存依赖并启用 `@EnableCaching` 后，缓存基础设施自动配置。注意官方提示：**不要**把 `@EnableCaching` 加在主应用类上——那会让缓存成为强制特性（跑测试也被迫初始化），放到独立配置类：
+Spring Boot 检测到缓存依赖并启用 `@EnableCaching` 后，缓存基础设施[自动配置](/glossary#自动配置auto-configuration)。注意官方提示：**不要**把 `@EnableCaching` 加在主应用类上——那会让缓存成为强制特性（跑测试也被迫初始化），放到独立配置类：
 
 ```java
 @Configuration(proxyBeanMethods = false)
@@ -113,7 +113,7 @@ spring:
       use-key-prefix: true
 ```
 
-默认 value 序列化是 JDK 序列化：可读性差、要求实现 `Serializable`。生产换 JSON，声明自定义 `RedisCacheConfiguration` Bean：
+默认 value 序列化是 JDK 序列化：可读性差、要求实现 `Serializable`。生产换 JSON，声明自定义 `RedisCacheConfiguration` [Bean](/glossary#bean)：
 
 ```java
 @Bean
@@ -189,7 +189,7 @@ public RedisCacheManagerBuilderCustomizer perCacheTtl() {
 }
 ```
 
-Caffeine 单一 `spec` 对所有 `cache-names` 生效；确需按缓存名差异化时，`CaffeineCacheManager` 的定制粒度在 Boot 自动配置之外，参考官方镜像 caching.md 的 Caffeine 一节按 `Caffeine` Bean 方式自建。
+Caffeine 单一 `spec` 对所有 `cache-names` 生效；确需按缓存名差异化时，`CaffeineCacheManager` 的定制粒度在 Boot [自动配置](/glossary#自动配置auto-configuration)之外，参考官方镜像 caching.md 的 Caffeine 一节按 `Caffeine` [Bean](/glossary#bean) 方式自建。
 
 ### 深入：@CacheConfig 类级抽取
 
@@ -230,7 +230,7 @@ spring.cache.jcache.provider=com.example.MyCachingProvider
 spring.cache.jcache.config=classpath:example.xml
 ```
 
-微调自动配置结果用 `CacheManagerCustomizer` Bean（在 CacheManager 初始化完成前生效；类型对不上则不会被调用）：
+微调[自动配置](/glossary#自动配置auto-configuration)结果用 `CacheManagerCustomizer` [Bean](/glossary#bean)（在 CacheManager 初始化完成前生效；类型对不上则不会被调用）：
 
 ```java
 @Bean
@@ -258,7 +258,7 @@ CacheManagerCustomizer<ConcurrentMapCacheManager> allowNullTuning() {
 
 ### 深入：测试与降级
 
-缓存配置放进独立 `@Configuration` 类，切片测试就不会被迫初始化缓存。测试时两种 no-op 姿势：
+缓存配置放进独立 `@Configuration` 类，[切片测试](/glossary#切片测试test-slice)就不会被迫初始化缓存。测试时两种 no-op 姿势：
 
 ```java
 @SpringBootTest
@@ -287,9 +287,9 @@ spring.cache.type=none
 | `spring.cache.redis.time-to-live` | Redis 全局 TTL，默认永不过期 |
 | `spring.cache.redis.cache-null-values` | 是否缓存 null（默认 `true`，防穿透建议关） |
 | `spring.cache.redis.key-prefix` / `use-key-prefix` | key 前缀（默认 `缓存名::`），建议保持开启 |
-| `RedisCacheManagerBuilderCustomizer` | 按缓存名差异化 TTL 与序列化的定制 Bean |
+| `RedisCacheManagerBuilderCustomizer` | 按缓存名差异化 TTL 与序列化的定制 [Bean](/glossary#bean) |
 
-provider 自动探测顺序：Generic → JCache → Hazelcast → Infinispan → Couchbase → Redis → Caffeine → Cache2k → Simple；classpath 同时有多个时用 `spring.cache.type` 显式钉死。微调自动配置用 `CacheManagerCustomizer` Bean（如 `setAllowNullValues(false)`）。
+provider 自动探测顺序：Generic → JCache → Hazelcast → Infinispan → Couchbase → Redis → Caffeine → Cache2k → Simple；classpath 同时有多个时用 `spring.cache.type` 显式钉死。微调[自动配置](/glossary#自动配置auto-configuration)用 `CacheManagerCustomizer` Bean（如 `setAllowNullValues(false)`）。
 
 ## 避坑指南
 

@@ -14,7 +14,7 @@ official: https://docs.spring.io/spring-boot/4.1.1/reference/features/logging.ht
 - 用 application.yaml 与 Actuator `/actuator/loggers` 在运行期动态调级
 - 日志分组（`logging.group.*`）与开箱即用的 `web`/`sql` 组
 - 结构化日志三种 JSON 格式（ECS / GELF / Logstash）的最小配置
-- MDC 与虚拟线程的关系，以及为什么生产代码禁止 `System.out.println`
+- MDC 与[虚拟线程](/glossary#虚拟线程-vs-平台线程)的关系，以及为什么生产代码禁止 `System.out.println`
 
 > **上一章**：[配置管理与多环境](/guide/configuration) · **下一章**：[虚拟线程深度实践](/practice/virtual-threads)
 
