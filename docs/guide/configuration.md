@@ -54,6 +54,15 @@ java -jar app.jar --server.port=9000
 export SERVER_PORT=9000
 ```
 
+```powershell
+# 临时覆盖（一次性）：参数语法与 bash 完全一致
+java -jar app.jar --server.port=9000
+
+# 环境变量：PowerShell 用 $env: 前缀，只对当前会话生效
+$env:SERVER_PORT = "9000"
+java -jar app.jar
+```
+
 ### 配置文件放在哪些地方被找到
 
 不指定任何路径时，Spring Boot 按从低到高依次查找 `application.yaml`：
@@ -88,6 +97,12 @@ spring:
 
 ```bash
 export SPRING_APPLICATION_JSON='{"server":{"port":9000},"logging":{"level":{"root":"warn"}}}'
+java -jar app.jar
+```
+
+```powershell
+# PowerShell 单引号字符串内双引号原样保留，JSON 体可直接粘贴
+$env:SPRING_APPLICATION_JSON = '{"server":{"port":9000},"logging":{"level":{"root":"warn"}}}'
 java -jar app.jar
 ```
 
@@ -261,6 +276,11 @@ Spring Boot 不提供内置的配置加密——这是设计决定，官方推�
 # 代码与配置文件里只留占位符
 # application-prod.yaml:  spring.datasource.password: ${DB_PASSWORD}
 export DB_PASSWORD='真实密码'
+java -jar app.jar --spring.profiles.active=prod
+```
+
+```powershell
+$env:DB_PASSWORD = "你的真实密码"
 java -jar app.jar --spring.profiles.active=prod
 ```
 

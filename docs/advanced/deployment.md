@@ -16,7 +16,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/reference/packaging/containe
 
 上一章：[可观测性与 Actuator 生产参数](/advanced/observability)——本页的探针与健康检查依赖其中接入的 Actuator。
 
-> **上一章**：[可观测性与 Actuator 生产参数](/advanced/observability) · **下一章**：[注解、[Starter](/glossary#starter) 与配置项速查](/reference/api)
+> **上一章**：[可观测性与 Actuator 生产参数](/advanced/observability) · **下一章**：[注解、Starter 与配置项速查](/reference/api)
 
 ## 业务场景
 

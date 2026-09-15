@@ -11,7 +11,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/reference/data/sql.html"
 > - 两个数据源 + 两个事务管理器的配置类骨架（含 Boot 4 的 `defaultCandidate=false` 关键写法）
 > - Flyway 版本化迁移规范与生产配置，外加 7 条数据层避坑
 >
-> 📍 **上章**：[消息：Kafka、AMQP 与 JMS](/practice/messaging) · **下一章**：[缓存：Caffeine 与 Redis](/practice/caching)
+> **上一章**：[消息：Kafka、AMQP 与 JMS](/practice/messaging) · **下一章**：[缓存：Caffeine 与 Redis](/practice/caching)
 
 ## 业务场景
 

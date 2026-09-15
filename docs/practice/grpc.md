@@ -103,12 +103,16 @@ public class MyHelloWorldService extends HelloWorldGrpc.HelloWorldImplBase {
 使用 `spring-boot-starter-grpc-server` 时，Netty 作为服务端实现，监听 **9090** 端口。用 `grpcurl` 即可验证：
 
 ```bash
-$ grpcurl -d '{"name":"Spring"}' -plaintext localhost:9090 HelloWorld.SayHello
+grpcurl -d '{"name":"Spring"}' -plaintext localhost:9090 HelloWorld.SayHello
 
 {
   "message": "Hello 'Spring'"
 }
 ```
+
+::: tip Windows PowerShell 下调 grpcurl
+JSON 体里的双引号需要转义，推荐把报文放进文件再引用，避开引号地狱：`grpcurl -d @request.json -plaintext localhost:9090 HelloWorld.SayHello`（`@文件名` 语法从文件读 payload，跨平台行为一致）。
+:::
 
 ### 第四步：客户端注入 stub
 

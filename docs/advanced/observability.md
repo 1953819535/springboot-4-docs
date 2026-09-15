@@ -17,7 +17,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/reference/actuator/endpoints
 
 端点访问控制会用到 `SecurityFilterChain`（见[安全与鉴权](/advanced/security)）；探针接入 K8s 的做法见[打包、镜像与部署](/advanced/deployment)。
 
-> **上一章**：[测试策略与 [Testcontainers](/glossary#testcontainers)](/advanced/testing) · **下一章**：[打包、镜像与部署](/advanced/deployment)
+> **上一章**：[测试策略与 Testcontainers](/advanced/testing) · **下一章**：[打包、镜像与部署](/advanced/deployment)
 
 ## 业务场景
 
@@ -120,7 +120,7 @@ HTTP、JVM、连接池（`hikaricp.*`）、缓存等内置指标由 Micrometer �
 
 暴露 `loggers` 端点后可在线调级，排障完毕再调回，全程不重启：
 
-```bash
+```bash [macOS / Linux]
 # 查看单个 logger（GET）：configuredLevel 是显式配置，effectiveLevel 是最终生效值
 curl http://localhost:8080/actuator/loggers/com.example.order
 
@@ -128,6 +128,17 @@ curl http://localhost:8080/actuator/loggers/com.example.order
 curl -X POST http://localhost:8080/actuator/loggers/com.example.order \
      -H 'Content-Type: application/json' -d '{"configuredLevel":"DEBUG"}'
 # POST 空对象 {} 可清除显式级别，回落到继承值
+```
+```powershell [Windows PowerShell]
+# GET：Invoke-RestMethod 直接反序列化 JSON，看 effectiveLevel 最方便
+(Invoke-RestMethod http://localhost:8080/actuator/loggers/com.example.order).effectiveLevel
+
+# POST 调级：JSON 体用单引号包裹，内层属性用转义引号
+Invoke-RestMethod -Uri "http://localhost:8080/actuator/loggers/com.example.order" `
+  -Method Post -ContentType "application/json; charset=utf-8" `
+  -Body '{"configuredLevel":"DEBUG"}'
+
+# 清除显式级别：Body 换成空对象 {}
 ```
 
 响应里的 `groups` 很实用：内置 `web`、`sql` 组覆盖一类相关 logger，`POST /actuator/loggers/sql` 一次调一整组。

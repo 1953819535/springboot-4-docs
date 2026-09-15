@@ -8,7 +8,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/appendix/deprecated-applicat
 
 > 本页是全站唯一出现"旧名"的页面——仅作迁移对照用。正文各章一律只写 4.1.1 现行写法。
 
-> **上一章**：[注解、[Starter](/glossary#starter) 与配置项速查](/reference/api) · **下一章**：[核心概念速查（零基础术语表）](/glossary)
+> **上一章**：[注解、Starter 与配置项速查](/reference/api) · **下一章**：[核心概念速查（术语表）](/glossary)
 
 ## 业务场景
 

@@ -68,6 +68,19 @@ description: 《现代 Spring Boot 4.1.1 企业开发快速入门》章节演进
 - Starter 更名至 4.x 现行名（`starter-webmvc`、`starter-aspectj`），`starter-test` 新增 `-classic` 变体
 - 安全配置统一 `SecurityFilterChain` lambda DSL（Spring Security 7）
 
+### [2026-09-15] PowerShell 命令变体
+
+#### Added
+
+- `guide/getting-started.md`：Spring Initializr 下载命令增加 Windows PowerShell 对照（Invoke-WebRequest 原生命令，避开 curl 别名陷阱）
+- `advanced/observability.md`：Actuator loggers 运行期调级 GET/POST 增加 PowerShell 版本（Invoke-RestMethod + 反引号续行）
+- `guide/configuration.md`：三处环境变量命令（SERVER_PORT 临时覆盖 / SPRING_APPLICATION_JSON / DB_PASSWORD 敏感值注入）全部增加 `$env:` 变体，JSON 单引号语义差异已标注
+- `practice/grpc.md`：grpcurl 调用增加 PowerShell 引号转义提示（`-d @request.json` 文件引用法，跨平台一致）
+
+#### Changed
+
+- 全站导航行措辞统一为「上一章 / 下一章」标准形态（覆盖 上一步/📍上章/混排链接 等 6 处变体）
+- 术语自动链接 151 处落位后清理 7 个文件的嵌套链接与 6 处标题内误链（避免破坏 VitePress 目录锚点）
 ## [Unreleased]
 
 ### 计划

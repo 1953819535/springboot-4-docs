@@ -14,7 +14,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/reference/messaging/kafka.ht
 - JMS：`@JmsListener` 并发参数与事务绑定
 - 消费并发、幂等、publisher confirms 等生产参数
 
-> 上一步：[Spring gRPC 服务](/practice/grpc) ｜ 下一步：[数据访问与事务](/practice/data-access)
+> **上一章**：[Spring gRPC 服务](/practice/grpc) · **下一章**：[数据访问与事务](/practice/data-access)
 
 ## 业务场景
 

@@ -6,7 +6,7 @@ official: https://docs.spring.io/spring-boot/4.1.1/reference/web/spring-security
 
 > **本章你会学到**：引入 starter 后 Spring Boot 默认提供了哪些防护；如何用 `SecurityFilterChain` + lambda DSL 重写授权规则；JWT 资源服务器的三个关键属性（`issuer-uri` / `jwk-set-uri` / `audiences`）与角色映射；没有外部 IdP 时，如何用自有用户表 + 自签 JWT 完成登录闭环；CORS 与 CSRF 各管什么；以及怎么给安全规则本身写测试。
 
-> **下一章**：[测试策略与 [Testcontainers](/glossary#testcontainers)](/advanced/testing)
+> **下一章**：[测试策略与 Testcontainers](/advanced/testing)
 ## 业务场景
 
 团队做的是前后端分离的订单系统，前端独立部署，API 需要对接公司统一身份平台（IdP），由 IdP 签发 JWT，后端只做校验——这是典型的**资源服务器**路线，也是本章的主线。

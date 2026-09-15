@@ -8,7 +8,7 @@ official: "https://docs.spring.io/spring-boot/4.1.1/reference/web/servlet.html"
 
 本章你会学到：从 Controller→Service→Repository 的完整分层写法，到文件上传下载、分页排序、ProblemDetail 统一异常与 CORS 配置的整套生产级 REST 实践。
 
-> **上一章**：[[IoC](/glossary#ioc-容器与-ioc-容器)、依赖注入与配置绑定](/guide/ioc-di) · **下一章**：[配置管理与多环境](/guide/configuration)
+> **上一章**：[IoC、依赖注入与配置绑定](/guide/ioc-di) · **下一章**：[配置管理与多环境](/guide/configuration)
 
 ## 业务场景
 

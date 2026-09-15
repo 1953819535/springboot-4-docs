@@ -49,11 +49,15 @@ gradle --version  # 期望 8.14+ 或 9.x
 
 也可以直接命令行生成：
 
-```bash
+```bash [macOS / Linux]
 curl -G https://start.spring.io/starter.zip \
   -d dependencies=webmvc,devtools \
   -d type=maven-project -d language=java -d javaVersion=25 \
   -d groupId=com.example -d artifactId=demo -o demo.zip
+```
+```powershell [Windows PowerShell]
+# curl 在 PowerShell 里是 Invoke-WebRequest 的别名，直接用原生命令最稳
+Invoke-WebRequest -Uri "https://start.spring.io/starter.zip?dependencies=webmvc,devtools&type=maven-project&language=java&javaVersion=25&groupId=com.example&artifactId=demo" -OutFile demo.zip
 ```
 
 ### 3. 认识标准目录结构
