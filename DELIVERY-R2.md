@@ -84,3 +84,8 @@ guide/getting-started.md、guide/ioc-di.md、guide/configuration.md、guide/rest
 顺带完成导航一致性收尾：6 处措辞变体（上一步/📍上章/嵌套链接）统一为标准「上一章/下一章」形态，术语自动链接造成的 7 文件嵌套链接与 6 处标题误链已清理。
 
 复验：构建 9.62s 通过（0 死链）、红线 0 命中、nav_audit4 归零。Git 提交 09c48f6。
+## 八轮修复（2026-09-15）：流程图 SVG 畸形导致裂图
+
+用户截图反馈 4 张流程图实际无法展示。诊断：生成脚本的模板字符串残留字面量 `{W}` 占位符（用 `.replace` 而非正确插值），导致 4 张 SVG 第 1 行 XML 声明畸形——浏览器拒绝渲染（ET.fromstring 解析全部报 invalid token）。
+
+修复：重写生成脚本（纯字符串拼接 + XML 转义函数），重生成 4 张 SVG。验证：XML 解析全部 VALID；结构断言（每图 rect/text 节点数与关键文案）全部命中；构建后 dist/diagrams/ 4 文件有效，4 个页面的 `<img src="/diagrams/*.svg">` 引用正确。Git 提交 4713647。
