@@ -28,7 +28,9 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Install dependencies
-        run: npm ci
+        run: |
+          # npm bug 4828: lock generated on Windows lacks linux optional deps
+          npm ci || (rm -rf node_modules && npm install)
       - name: Build with VitePress
         run: npm run docs:build
       - name: Upload artifact
